@@ -57,27 +57,21 @@ session_start() ?>
 </form>
 
 <?php
-
 require_once 'FilmApi.php';
 
 if($_POST['genre']){
-
     $ids = $_POST['genre'];
-
     $api = new FilmApi();
-
     $data = $api->OrderByGenre($ids)[0];
     $url = $api->OrderByGenre($ids)[1];
     $films_ordered = json_decode($data);
-
-
 }
 
 ?>
 <div>
     <?php foreach ($films_ordered->results as $film){ ?>
             <img src=" https://image.tmdb.org/t/p/w500<?php echo $film->backdrop_path ?>" alt="" >
-            <h3><?php echo $film->title; ?></h3>
+            <h3 ><?php echo $film->title; ?></h3>
             <p><?php $g=$film->genre_ids; $a=sizeof($g); $x=0;
                 while($a > $x) {
                     $List_name=$api->NameGenreById($g);
@@ -89,13 +83,10 @@ if($_POST['genre']){
                 ?></p>
             <p>Popularity : <?php echo $film->popularity; ?></p>
             <p>Vote average : <?php echo $film->vote_average ?></p>
-            <p>Date de sortie : </p><?php echo $film->release_date; ?>
+            <p>Date de sortie : <?php echo $film->release_date; ?></p>
     <?php } ?>
-
-
-
-
 </div>
 
 </body>
+
 </html>
