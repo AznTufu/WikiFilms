@@ -60,9 +60,7 @@ session_start() ?>
 
 require_once 'FilmApi.php';
 
-if($_POST){
-
-
+if($_POST['genre']){
 
     $ids = $_POST['genre'];
 
@@ -78,36 +76,26 @@ if($_POST){
 ?>
 <div>
     <?php foreach ($films_ordered->results as $film){ ?>
-        <img src=" https://image.tmdb.org/t/p/w500<?php echo $film->backdrop_path ?>" alt="" >
-        <h3><?php echo $film->title; ?></h3>
-        <p>Popularity : <?php echo $film->popularity; ?></p>
-        <p>Vote average : <?php echo $film->vote_average ?></p>
-        <p>Date de sortie : </p><?php echo $film->release_date; ?>
-
-
-
-
+            <img src=" https://image.tmdb.org/t/p/w500<?php echo $film->backdrop_path ?>" alt="" >
+            <h3><?php echo $film->title; ?></h3>
+            <p><?php $g=$film->genre_ids; $a=sizeof($g); $x=0;
+                while($a > $x) {
+                    $List_name=$api->NameGenreById($g);
+                    $x++;
+                }
+                foreach ($List_name as $item) {
+                    echo $item . ' ';
+                }
+                ?></p>
+            <p>Popularity : <?php echo $film->popularity; ?></p>
+            <p>Vote average : <?php echo $film->vote_average ?></p>
+            <p>Date de sortie : </p><?php echo $film->release_date; ?>
     <?php } ?>
 
+
+
+
 </div>
-
-<script>
-export default {
-    name: "get-request",
-    data() {
-        return {
-            films: null
-        };
-    },
-    created() {
-        // Simple GET request using fetch
-        fetch('<?php $url ?>')
-            .then(response => response.json())
-            .then(data => (this.films = data));
-    }
-};
-
-</script>
 
 </body>
 </html>
