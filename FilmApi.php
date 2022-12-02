@@ -9,7 +9,6 @@ class FilmApi
     public function __construct()
     {
         $this->baseUrl = "https://api.themoviedb.org/3/";
-        $key='?api_key=d0b7129e9d0d86b5a34fd25e94dc9283';
     }
     public function OrderByGenre($ids){
 
@@ -17,14 +16,15 @@ class FilmApi
 
 
         $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&with_genres='.$ids;
-        var_dump($url);
 
-        return $this->sendRequest($url);
+
+        return [$this->sendRequest($url), $url];
     }
 
     public function sendRequest($url){
         $client = new Client();
         $response = $client->get($url);
+
 
         return $response->getBody();
     }
