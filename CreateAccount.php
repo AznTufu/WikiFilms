@@ -31,7 +31,7 @@
 
 <?php
 require_once 'user.php';
-require_once 'connection.php';
+require_once 'Connection.php';
 
 
 if($_POST){

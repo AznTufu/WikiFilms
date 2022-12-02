@@ -1,0 +1,17 @@
+{
+    "name": "roroc/wiki_film",
+    "autoload": {
+        "psr-4": {
+            "Roroc\\WikiFilm\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rowars2",
+            "email": "romain.parisot@edu.devinci.fr"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}

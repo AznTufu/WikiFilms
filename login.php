@@ -26,7 +26,7 @@
 
 <?php
 require_once 'user.php';
-require_once 'connection.php';
+require_once 'Connection.php';
 
 if($_POST){
     $email = stripslashes($_POST['email']);
@@ -38,6 +38,7 @@ if($_POST){
         $_SESSION['user_type'] = 'User' ;
         header("Location: index.php");
         echo "utilisateur trouvé";
+
     }else{
         echo "Email or password not valid";
     }
