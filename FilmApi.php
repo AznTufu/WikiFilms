@@ -18,23 +18,47 @@ class FilmApi
     public function OrderByName(){
 
     }
-    public function OrderByPopularityAndGenre($ids, $pop){
+    public function OrderByGenre($ids){
         $ids = join('%2C', $ids);
         $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&with_genres='.$ids;
+        return $url;
+    }
+    public function OrderByPopularity($pop){
+        if ($pop == "asc"){
+            $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&sort_by=popularity.asc';
+        }
 
+        elseif ($pop == "desc"){
+            $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&sort_by=popularity.desc';
+        }
+        else {
+            var_dump('Le parametre doit posseder comme valeur asc ou desc');
+        }
+        return $url;
+    }
+    public function OrderByPopularityAndGenre($ids, $pop){
+        $url = $this->OrderByGenre($ids);
         if ($pop == "asc"){
             $url = $url.'&sort_by=popularity.asc';
         }
-
         elseif ($pop == "desc"){
             $url = $url.'&sort_by=popularity.desc';
         }
         else {
             var_dump('Le parametre doit posseder comme valeur asc ou desc');
         }
-        var_dump($url);
-        return $this->sendRequest($url);
+        return $url;
 }
+    public function OrderByPopAndGenreAndAge($ids,$pop, $adult){
+        $url = $this->OrderByPopularityAndGenre($ids,$pop);
+        if ($adult){
+            $url = $url . "&include_adult=false";
+        }
+        else{
+            $url = $url ."&include_adult=true";
+        }
+        return $this->sendRequest($url);
+    }
 
     public function NameGenreById($id){
 
@@ -107,24 +131,7 @@ class FilmApi
 
 
     /* --------not used-------*/
-    public function OrderByPopularity($pop){
-        if ($pop == "asc"){
-            $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&sort_by=popularity.asc';
-        }
 
-        elseif ($pop == "desc"){
-            $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&sort_by=popularity.desc';
-        }
-        else {
-            var_dump('Le parametre doit posseder comme valeur asc ou desc');
-        }
-        return $this->sendRequest($url);
-    }
-    public function OrderByGenre($ids){
-        $ids = join('%2C', $ids);
-        $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&with_genres='.$ids;
-        return $this->sendRequest($url) ;
-    }
 
 
 

@@ -59,6 +59,8 @@ session_start() ?>
         <option value="asc" >Ascending</option>
     </select>
 
+    <label for="">-18</label>
+    <input type="checkbox" name="adult" value="true">
 
 
     <input type="submit" >
@@ -74,14 +76,19 @@ $data = $api->OrderByTrendingDay();
 $films_ordered = json_decode($data);
 
 
+
 if (isset($_POST['genre']) && isset($_POST['pop'])) {
     var_dump($_POST);
     $ids = $_POST['genre'];
     $pop = $_POST['pop'];
+    $adult = false;
+    if (isset($_POST['adult'])){
+        $adult = true;
+    }
 
     $api = new FilmApi();
 
-    $data = $api->OrderByPopularityAndGenre($ids, $pop);
+    $data = $api->OrderByPopAndGenreAndAge($ids, $pop, $adult);
     $films_ordered = json_decode($data);
 
 }
@@ -89,7 +96,17 @@ if (isset($_POST['genre']) && isset($_POST['pop'])) {
 <div>
     <?php foreach ($films_ordered->results as $film){ ?>
             <img src=" https://image.tmdb.org/t/p/w500<?php echo $film->backdrop_path ?>" alt="" >
-            <h3 ><?php echo $film->title; ?></h3>
+            <h3 ><?php if (isset($film->title)){
+                    echo $film->title;
+                }
+                elseif (isset($film->name)){
+                    echo $film->name;
+                }
+                else{
+                    echo 'title infound';
+                }
+
+               ?></h3>
             <p><?php $g=$film->genre_ids; $a=sizeof($g); $x=0;
                 while($a > $x) {
                     $List_name=$api->NameGenreById($g);
@@ -101,7 +118,17 @@ if (isset($_POST['genre']) && isset($_POST['pop'])) {
                 ?></p>
             <p>Popularity : <?php echo $film->popularity; ?></p>
             <p>Vote average : <?php echo $film->vote_average ?></p>
-            <p>Date de sortie : <?php echo $film->release_date; ?></p>
+            <p>Date de sortie : <?php if (isset($film->release_date)){
+                    echo $film->release_date;
+                }
+                elseif (isset($film->first_air_date)){
+                    echo $film->first_air_date;
+                }
+                else{
+                    echo 'release date infound';
+                }
+                 ?></p>
+            <p>-18 : <?php echo $film->adult ?></p>
 
     <?php } ?>
 </div>
