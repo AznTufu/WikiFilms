@@ -53,24 +53,36 @@ session_start() ?>
     <label>Western</label>
     <input name="genre[]" type="checkbox" value="37">
 
-    <input type="submit" value="submit" placeholder="Recherche">
+    <select name="pop" value="pop">
+        <option value="desc" >Descending</option>
+        <option value="asc" >Ascending</option>
+    </select>
+
+
+
+    <input type="submit" >
 </form>
+
 
 <?php
 
 require_once 'FilmApi.php';
 
-if($_POST['genre']){
+$api = new FilmApi();
 
+$data = $api->OrderByTrendingDay();
+$films_ordered = json_decode($data);
+
+
+if (isset($_POST['genre']) && isset($_POST['pop'])){
+    var_dump($_POST);
     $ids = $_POST['genre'];
+    $pop = $_POST['pop'];
 
     $api = new FilmApi();
 
-    $data = $api->OrderByGenre($ids)[0];
-    $url = $api->OrderByGenre($ids)[1];
+    $data = $api->OrderByPopularityAndGenre($ids,$pop);
     $films_ordered = json_decode($data);
-
-
 }
 
 ?>
@@ -89,7 +101,8 @@ if($_POST['genre']){
                 ?></p>
             <p>Popularity : <?php echo $film->popularity; ?></p>
             <p>Vote average : <?php echo $film->vote_average ?></p>
-            <p>Date de sortie : </p><?php echo $film->release_date; ?>
+            <p>Date de sortie : <?php echo $film->release_date; ?></p>
+
     <?php } ?>
 
 

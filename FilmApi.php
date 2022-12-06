@@ -10,14 +10,32 @@ class FilmApi
     {
         $this->baseUrl = "https://api.themoviedb.org/3/";
     }
-    public function OrderByGenre($ids){
-        $ids = join('%2C', $ids);
-        $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&with_genres='.$ids;
-        return [$this->sendRequest($url), $url];
+
+    public function OrderByTrendingDay(){
+        $url = $this->baseUrl.'trending/all/day'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283';
+        return $this->sendRequest($url);
     }
     public function OrderByName(){
 
     }
+    public function OrderByPopularityAndGenre($ids, $pop){
+        $ids = join('%2C', $ids);
+        $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&with_genres='.$ids;
+
+        if ($pop == "asc"){
+            $url = $url.'&sort_by=popularity.asc';
+        }
+
+        elseif ($pop == "desc"){
+            $url = $url.'&sort_by=popularity.desc';
+        }
+        else {
+            var_dump('Le parametre doit posseder comme valeur asc ou desc');
+        }
+        var_dump($url);
+        return $this->sendRequest($url);
+}
+
     public function NameGenreById($id){
 
         $List_name=[];
@@ -85,6 +103,27 @@ class FilmApi
             }
         }
         return $List_name;
+    }
+
+
+    /* --------not used-------*/
+    public function OrderByPopularity($pop){
+        if ($pop == "asc"){
+            $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&sort_by=popularity.asc';
+        }
+
+        elseif ($pop == "desc"){
+            $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&sort_by=popularity.desc';
+        }
+        else {
+            var_dump('Le parametre doit posseder comme valeur asc ou desc');
+        }
+        return $this->sendRequest($url);
+    }
+    public function OrderByGenre($ids){
+        $ids = join('%2C', $ids);
+        $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&with_genres='.$ids;
+        return $this->sendRequest($url) ;
     }
 
 
