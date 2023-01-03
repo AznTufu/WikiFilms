@@ -49,7 +49,7 @@ class FilmApi
         }
         return $url;
 }
-    public function OrderByPopAndGenreAndAge($ids,$pop, $adult){
+    public function Order($ids,$pop, $adult, $imdb){
         $url = $this->OrderByPopularityAndGenre($ids,$pop);
         if ($adult){
             $url = $url . "&include_adult=true";
@@ -57,8 +57,15 @@ class FilmApi
         else{
             $url = $url ."&include_adult=false";
         }
+        if ($imdb == false){
+            $url = $url ;
+        }
+        else{
+            $url = $url . "&vote_average.lte=" . $imdb;
+        }
         return $this->sendRequest($url);
     }
+
 
     public function NameGenreById($id){
 

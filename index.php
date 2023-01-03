@@ -54,13 +54,17 @@ session_start() ?>
     <label>Western</label>
     <input name="genre[]" type="checkbox" value="37">
 
+    <label for="">Select the popularity order :</label>
     <select name="pop" value="pop">
         <option value="desc" >Descending</option>
         <option value="asc" >Ascending</option>
     </select>
 
-    <label for="">-18</label>
+    <label for="">Do you want film including -18 limitation ?</label>
     <input type="checkbox" name="adult" value="true">
+
+    <label for="">Select the minimum score you want on Avis IMDB rating </label>
+    <input type="number" name="imdb">
 
 
     <input type="submit" >
@@ -81,14 +85,22 @@ if (isset($_POST['genre']) && isset($_POST['pop'])) {
     var_dump($_POST);
     $ids = $_POST['genre'];
     $pop = $_POST['pop'];
+
     $adult = false;
     if (isset($_POST['adult'])){
         $adult = true;
     }
 
+    if (isset($_POST['imdb'])){
+        $imdb = $_POST['imdb'];
+    }
+    else{
+        $imdb = false;
+    }
+
     $api = new FilmApi();
 
-    $data = $api->OrderByPopAndGenreAndAge($ids, $pop, $adult);
+    $data = $api->Order($ids, $pop, $adult, $imdb);
     $films_ordered = json_decode($data);
 
 }
