@@ -18,7 +18,7 @@ class FilmApi
     public function OrderByName(){
 
     }
-    
+
     public function Order($ids,$pop, $adult, $imdb){
 
         $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283';
@@ -56,7 +56,7 @@ class FilmApi
             $url = $url ;
         }
         else{
-            $url = $url . "&vote_average.lte=" . $imdb;
+            $url = $url . "&vote_average.gte=" . $imdb;
         }
 
         return $this->sendRequest($url);
