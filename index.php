@@ -81,14 +81,23 @@ $films_ordered = json_decode($data);
 
 
 
-if (isset($_POST['genre']) && isset($_POST['pop'])) {
+if ($_POST) {
     var_dump($_POST);
-    $ids = $_POST['genre'];
+    if (isset($_POST['genre'])){
+        $ids = $_POST['genre'];
+    }
+    else{
+        $ids = false;
+    }
+
     $pop = $_POST['pop'];
 
-    $adult = false;
+
     if (isset($_POST['adult'])){
         $adult = true;
+    }
+    else{
+        $adult = false;
     }
 
     if (isset($_POST['imdb'])){

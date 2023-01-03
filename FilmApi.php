@@ -18,26 +18,21 @@ class FilmApi
     public function OrderByName(){
 
     }
-    public function OrderByGenre($ids){
-        $ids = join('%2C', $ids);
-        $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&with_genres='.$ids;
-        return $url;
-    }
-    public function OrderByPopularity($pop){
-        if ($pop == "asc"){
-            $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&sort_by=popularity.asc';
+    
+    public function Order($ids,$pop, $adult, $imdb){
+
+        $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283';
+
+        /* add or not genre filter */
+        if ($ids == false){
+            $url = $url;
+        }
+        else{
+            $ids = join('%2C', $ids);
+            $url = $url . '&with_genres=' . $ids;
         }
 
-        elseif ($pop == "desc"){
-            $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283'.'&sort_by=popularity.desc';
-        }
-        else {
-            var_dump('Le parametre doit posseder comme valeur asc ou desc');
-        }
-        return $url;
-    }
-    public function OrderByPopularityAndGenre($ids, $pop){
-        $url = $this->OrderByGenre($ids);
+        /* add or not pop filter */
         if ($pop == "asc"){
             $url = $url.'&sort_by=popularity.asc';
         }
@@ -47,22 +42,23 @@ class FilmApi
         else {
             var_dump('Le parametre doit posseder comme valeur asc ou desc');
         }
-        return $url;
-}
-    public function Order($ids,$pop, $adult, $imdb){
-        $url = $this->OrderByPopularityAndGenre($ids,$pop);
+
+        /* add or not adult filter */
         if ($adult){
             $url = $url . "&include_adult=true";
         }
         else{
             $url = $url ."&include_adult=false";
         }
+
+        /* add or not imdb filter */
         if ($imdb == false){
             $url = $url ;
         }
         else{
             $url = $url . "&vote_average.lte=" . $imdb;
         }
+
         return $this->sendRequest($url);
     }
 
