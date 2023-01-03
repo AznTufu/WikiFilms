@@ -119,7 +119,7 @@ if ($_POST) {
         <div>
             <a href="SinglePage.php">
                 <?php if($film->backdrop_path == Null){ ?>
-                    <img src="question_mark.jpg" alt="" >
+                    <img src="img/question_mark.jpg" alt="" >
                 <?php }
                 else{ ?>
                     <img src=" https://image.tmdb.org/t/p/w500<?php echo $film->backdrop_path ?>" alt="" >
