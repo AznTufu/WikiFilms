@@ -117,7 +117,12 @@ if ($_POST) {
 <section class="grid grid-cols-5 gap-4 mx-[150px] my-[50px] shadow-blue-500/50">
     <?php foreach ($films_ordered->results as $film){ ?>
         <div>
-            <img src=" https://image.tmdb.org/t/p/w500<?php echo $film->backdrop_path ?>" alt="" >
+            <?php if($film->backdrop_path == Null){ ?>
+                <img src="question_mark.jpg" alt="" >
+            <?php }
+            else{ ?>
+                <img src=" https://image.tmdb.org/t/p/w500<?php echo $film->backdrop_path ?>" alt="" >
+            <?php }?>
             <h3 ><?php if (isset($film->title)){
                     echo $film->title;
                 }
