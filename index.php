@@ -63,7 +63,7 @@ session_start() ?>
     <label for="">Do you want film including -18 limitation ?</label>
     <input type="checkbox" name="adult" value="true">
 
-    <label for="">Select the minimum score you want on Avis IMDB rating </label>
+    <label for="">Select the minimum score you want on Avis IMDB rating (0-10) </label>
     <input type="number" name="imdb">
 
 
