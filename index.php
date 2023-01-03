@@ -153,11 +153,20 @@ if ($_POST) {
                 <p>Popularity : <?php echo $film->popularity; ?></p>
                 <p>Vote average : <?php echo $film->vote_average ?></p>
                 <p>Date de sortie : <?php if (isset($film->release_date)){
-                        echo $film->release_date;
-                    }
+                        if($film->release_date == Null){
+                            echo 'No data';
+                        }
+                        else{
+                            echo $film->release_date;
+
+                        }}
                     elseif (isset($film->first_air_date)){
-                        echo $film->first_air_date;
-                    }
+                        if ($film->first_air_date == Null){
+                            echo 'No data';
+                        }
+                        else
+                            echo $film->first_air_date;
+                        }
                     else{
                         echo 'release date infound';
                     }
