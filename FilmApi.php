@@ -52,10 +52,10 @@ class FilmApi
     public function OrderByPopAndGenreAndAge($ids,$pop, $adult){
         $url = $this->OrderByPopularityAndGenre($ids,$pop);
         if ($adult){
-            $url = $url . "&include_adult=false";
+            $url = $url . "&include_adult=true";
         }
         else{
-            $url = $url ."&include_adult=true";
+            $url = $url ."&include_adult=false";
         }
         return $this->sendRequest($url);
     }
@@ -130,27 +130,13 @@ class FilmApi
     }
 
 
-    /* --------not used-------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 
     public function sendRequest($url){
         $client = new Client();
+        var_dump($url);
         $response = $client->get($url);
 
 
