@@ -63,7 +63,7 @@ session_start() ?>
     <label for="">Do you want film including -18 limitation ?</label>
     <input type="checkbox" name="adult" value="true">
 
-    <label for="">Select the minimum score you want on Avis IMDB rating </label>
+    <label for="">Select the minimum score you want on Avis IMDB rating (0-10) </label>
     <input type="number" name="imdb">
 
 
@@ -114,20 +114,27 @@ if ($_POST) {
 
 }
 ?>
-<section class="grid grid-cols-5 gap-6 mx-[150px] my-[50px] shadow-blue-500/50">
+<section class="grid grid-cols-4 gap-6 mx-[150px] my-[50px] shadow-blue-500/50">
     <?php foreach ($films_ordered->results as $film){ ?>
         <div>
-            <img src=" https://image.tmdb.org/t/p/w500<?php echo $film->backdrop_path ?>" alt="" >
-            <h3><?php if (isset($film->title)){
+            <?php if($film->backdrop_path == Null){ ?>
+                <img src="img/question_mark.jpg" alt="" >
+            <?php }
+            else {?>
+                <img src=" https://image.tmdb.org/t/p/w500<?php echo $film->backdrop_path ?>" alt="" >
+            <?php }?>
+            <h3><?php 
+                if (isset($film->title)){
                     echo $film->title;
-                }
+                }   
                 elseif (isset($film->name)){
                     echo $film->name;
                 }
                 else{
                     echo 'title infound';
                 }
-               ?></h3>
+                ?>
+            </h3>
             <p><?php $g=$film->genre_ids; $a=sizeof($g); $x=0;
                 while($a > $x) {
                     $List_name=$api->NameGenreById($g);
@@ -136,7 +143,8 @@ if ($_POST) {
                 foreach ($List_name as $item) {
                     echo $item . ' ';
                 }
-                ?></p>
+                ?>
+            </p>
             <p>Popularity : <?php echo $film->popularity; ?></p>
             <p>Vote average : <?php echo $film->vote_average ?></p>
             <p>Date de sortie : <?php if (isset($film->release_date)){
@@ -148,13 +156,14 @@ if ($_POST) {
                 else{
                     echo 'release date infound';
                 }
-                 ?></p>
-            <p>-18 : <?php if ($film->adult == Null) {
-                echo 'No';
+                 ?>
+            </p>
+            <p><?php if ($film->adult == Null) {
             }
             else{
-                echo 'Yes';
-                }?></p>
+                echo 'Adult content +18';
+                }?>
+            </p>
         </div>
     <?php } ?>
 </section>
