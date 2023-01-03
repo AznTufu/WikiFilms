@@ -128,7 +128,12 @@ if (isset($_POST['genre']) && isset($_POST['pop'])) {
                     echo 'release date infound';
                 }
                  ?></p>
-            <p>-18 : <?php echo $film->adult ?></p>
+            <p>-18 : <?php if ($film->adult == Null) {
+                echo 'No';
+            }
+            else{
+                echo 'Yes';
+                }?></p>
 
     <?php } ?>
 </div>
