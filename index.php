@@ -127,7 +127,6 @@ if ($_POST) {
                 else{
                     echo 'title infound';
                 }
-
                ?></h3>
             <p><?php $g=$film->genre_ids; $a=sizeof($g); $x=0;
                 while($a > $x) {
@@ -156,7 +155,7 @@ if ($_POST) {
             else{
                 echo 'Yes';
                 }?></p>
-
+        </div>
     <?php } ?>
 </section>
 
