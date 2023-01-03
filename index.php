@@ -93,8 +93,9 @@ if (isset($_POST['genre']) && isset($_POST['pop'])) {
 
 }
 ?>
-<div>
+<section class="grid grid-cols-5 gap-4 mx-[150px] my-[50px] shadow-blue-500/50">
     <?php foreach ($films_ordered->results as $film){ ?>
+        <div>
             <img src=" https://image.tmdb.org/t/p/w500<?php echo $film->backdrop_path ?>" alt="" >
             <h3 ><?php if (isset($film->title)){
                     echo $film->title;
@@ -129,9 +130,9 @@ if (isset($_POST['genre']) && isset($_POST['pop'])) {
                 }
                  ?></p>
             <p>-18 : <?php echo $film->adult ?></p>
-
+        </div>
     <?php } ?>
-</div>
+</section>
 
 </body>
 

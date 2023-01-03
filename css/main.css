@@ -563,12 +563,34 @@ video {
   position: relative;
 }
 
+.mx-\[150px\] {
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.my-\[50px\] {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
 .block {
   display: block;
 }
 
+.grid {
+  display: grid;
+}
+
 .contents {
   display: contents;
+}
+
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .uppercase {
@@ -584,9 +606,9 @@ video {
   color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
-.text-blue-500 {
-  --tw-text-opacity: 1;
-  color: rgb(59 130 246 / var(--tw-text-opacity));
+.shadow-blue-500\/50 {
+  --tw-shadow-color: rgb(59 130 246 / 0.5);
+  --tw-shadow: var(--tw-shadow-colored);
 }
 
 .filter {
