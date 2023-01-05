@@ -9,6 +9,7 @@ session_start() ?>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
     <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
 </head>
@@ -111,12 +112,11 @@ if ($_POST) {
 
     $data = $api->Order($ids, $pop, $adult, $imdb);
     $films_ordered = json_decode($data);
-
 }
 ?>
-<section class="grid grid-cols-4 gap-6 mx-[150px] my-[50px] shadow-blue-500/50">
+<section class="grid grid-cols-4 gap-6 mx-[150px] my-[50px]">
     <?php foreach ($films_ordered->results as $film){ ?>
-        <div>
+        <div class="flex flex-col bg-white shadow-lg border-current">
             <a href="SinglePage.php">
                 <?php if($film->backdrop_path == Null){ ?>
                     <img src="img/question_mark.jpg" alt="" >
@@ -124,59 +124,68 @@ if ($_POST) {
                 else{ ?>
                     <img src=" https://image.tmdb.org/t/p/w500<?php echo $film->backdrop_path ?>" alt="" >
                 <?php }?>
-                <h3 ><?php if (isset($film->title)){
-                        echo $film->title;
-                    }
-                    elseif (isset($film->name)){
-                        echo $film->name;
-                    }
-                    else{
-                        echo 'title infound';
-                    }
-                   ?></h3>
-                <p><?php
-                    if($film->genre_ids == Null){
-                        echo 'No data';
-                    }
-                    else{
-                        $g=$film->genre_ids; $a=sizeof($g); $x=0;
-                        while($a > $x) {
-                            $List_name=$api->NameGenreById($g);
-                            $x++;
+                <div class="px-4 py-2">
+                    <h3 class="text-xl text-[#212c36] font-bold">
+                        <?php if (isset($film->title)){
+                            echo $film->title;
                         }
-                        foreach ($List_name as $item) {
-                            echo $item . ' ';
+                        elseif (isset($film->name)){
+                            echo $film->name;
                         }
-                    }
-
-                    ?></p>
-                <p>Popularity : <?php echo $film->popularity; ?></p>
-                <p>Vote average : <?php echo $film->vote_average ?></p>
-                <p>Date de sortie : <?php if (isset($film->release_date)){
-                        if($film->release_date == Null){
+                        else{
+                            echo 'title infound';
+                        }?>
+                    </h3>
+                    <p class="pt-1 text-l text-[#a1b2bc] font-semibold"><?php
+                        if($film->genre_ids == Null){
                             echo 'No data';
                         }
                         else{
-                            echo $film->release_date;
-
-                        }}
-                    elseif (isset($film->first_air_date)){
-                        if ($film->first_air_date == Null){
-                            echo 'No data';
+                            $g=$film->genre_ids; $a=sizeof($g); $x=0;
+                            while($a > $x) {
+                                $List_name=$api->NameGenreById($g);
+                                $x++;
+                            }
+                            foreach ($List_name as $item) {
+                                echo $item . ' ';
+                            }
                         }
-                        else
-                            echo $film->first_air_date;
-                        }
-                    else{
-                        echo 'release date infound';
-                    }
-                     ?></p>
-                <p><?php if ($film->adult == Null) {
-                }
-                else{
-                    echo 'Adult content +18';
-                    }?>
-                </p>
+                        ?>
+                    </p>
+                    <div class="flex gap-4 pt-1">
+                        <p> <i class="fa-solid fa-eye opacity-50"></i> <?php echo $film->popularity ?></p>
+                        <p> <i class="fa-solid fa-check-to-slot opacity-50"></i> <?php echo $film->vote_average ?></p>
+                    </div>
+                    <div class="flex gap-4 pt-1">
+                        <p class="text-[#334454] font-semibold">
+                            <?php if (isset($film->release_date)){
+                                if($film->release_date == Null){
+                                    echo 'No data';
+                                }
+                                else{
+                                    echo $film->release_date;
+                                }}
+                            elseif (isset($film->first_air_date)){
+                                if ($film->first_air_date == Null){
+                                    echo 'No data';
+                                }
+                                else
+                                    echo $film->first_air_date;
+                                }
+                            else{
+                                echo 'release date infound';
+                            }
+                            ?>
+                        </p>
+                        <p>
+                            <?php if ($film->adult == Null) {
+                            }
+                            else{
+                                echo 'Adult content +18';
+                            }?>
+                        </p>
+                    </div>
+                </div>
             </a>
         </div>
     <?php } ?>
