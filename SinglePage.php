@@ -14,69 +14,37 @@ session_start() ?>
 </head>
 <body>
 
-<section class="grid grid-cols-4 gap-6 mx-[150px] my-[50px] shadow-blue-500/50">
-    <?php foreach ($films_ordered->results as $film){ ?>
-        <div>
-            <?php if($film->backdrop_path == Null){ ?>
-                <img src="img/question_mark.jpg" alt="" >
-            <?php }
-            else{ ?>
-                <img src=" https://image.tmdb.org/t/p/w500<?php echo $film->backdrop_path ?>" alt="" >
-            <?php }?>
-            <h3 ><?php if (isset($film->title)){
-                    echo $film->title;
-                }
-                elseif (isset($film->name)){
-                    echo $film->name;
-                }
-                else{
-                    echo 'title infound';
-                }
-                ?></h3>
-            <p><?php
-                if($film->genre_ids == Null){
-                    echo 'No data';
-                }
-                else{
-                    $g=$film->genre_ids; $a=sizeof($g); $x=0;
-                    while($a > $x) {
-                        $List_name=$api->NameGenreById($g);
-                        $x++;
-                    }
-                    foreach ($List_name as $item) {
-                        echo $item . ' ';
-                    }
-                }
+<?php $film_id = $_GET["film_id"];
 
-                ?></p>
-            <p>Popularity : <?php echo $film->popularity; ?></p>
-            <p>Vote average : <?php echo $film->vote_average ?></p>
-            <p>Date de sortie : <?php if (isset($film->release_date)){
-                    if($film->release_date == Null){
-                        echo 'No data';
-                    }
-                    else{
-                        echo $film->release_date;
+require_once 'FilmApi.php';
 
-                    }}
-                elseif (isset($film->first_air_date)){
-                    if ($film->first_air_date == Null){
-                        echo 'No data';
-                    }
-                    else
-                        echo $film->first_air_date;
-                    }
-                else{
-                    echo 'release date infound';
-                }
-                    ?></p>
-            <p><?php if ($film->adult == Null) {
-            }
-            else{
-                echo 'Adult content +18';
-                }?>
-            </p>
-        </div>
-    <?php } ?>
-</section>
+$api = new FilmApi();
+
+$data = $api->Movie_id($film_id);
+$films_ordered = json_decode($data);
+
+?>
+<div>
+<?php echo $films_ordered->budget;
+    echo $films_ordered->title;
+
+    if($films_ordered->backdrop_path == Null){ ?>
+    <img src="img/question_mark.jpg" alt="" >
+    <?php }
+    else{ ?>
+    <img src=" https://image.tmdb.org/t/p/w500<?php echo $films_ordered->backdrop_path ?>" alt="" >
+    <?php }
+
+    if($films_ordered->poster_path == Null){ ?>
+    <img src="img/question_mark.jpg" alt="" >
+    <?php }
+    else{ ?>
+    <img src=" https://image.tmdb.org/t/p/w500<?php echo $films_ordered->poster_path ?>" alt="" >
+    <?php }?>
+
+
+
+
+</div>
+
 </body>

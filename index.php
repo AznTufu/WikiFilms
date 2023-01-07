@@ -14,6 +14,7 @@ session_start() ?>
     <title>Document</title>
 </head>
 <body>
+<input type="text" class="recherche">
 <p class="text-red-500">Bonjour, <?php echo $_SESSION['name'] ?></p>
 <section>
     <form method="POST">
@@ -159,7 +160,8 @@ if ($_POST) {
 <section class="grid grid-cols-4 gap-8 mx-[150px] my-[50px]">
     <?php foreach ($films_ordered->results as $film){ ?>
         <div class="flex flex-col bg-white shadow-lg border-current">
-            <a href="SinglePage.php">
+            <?php $id_film=$film->id; ?>
+            <a href="SinglePage.php?film_id=<?php echo $id_film ?>">
                 <?php if($film->backdrop_path == Null){ ?>
                     <img src="img/question_mark.jpg" alt="" >
                 <?php }
@@ -234,5 +236,7 @@ if ($_POST) {
 </section>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="js.js"></script>
 
 </html>

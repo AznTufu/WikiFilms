@@ -19,6 +19,16 @@ class FilmApi
 
     }
 
+    public function Search($letters){
+        $url = 'https://api.themoviedb.org/3/search/movie?api_key=d0b7129e9d0d86b5a34fd25e94dc9283&query=$letters';
+        return $this->sendRequest($url);
+    }
+
+    public function Movie_id($id_film){
+        $url = "https://api.themoviedb.org/3/movie/" . $id_film . "?api_key=d0b7129e9d0d86b5a34fd25e94dc9283";
+        return $this->sendRequest($url);
+    }
+
     public function Order($ids,$pop, $adult, $imdb){
 
         $url = $this->baseUrl.'discover/movie'.'?api_key=d0b7129e9d0d86b5a34fd25e94dc9283';
