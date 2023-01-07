@@ -170,13 +170,13 @@ class Connection
 
     public function delete_film_in_album($movie_id, $album_id): bool
     {
-        $query = "DELETE FROM movie WHERE movie_id='$movie_id' and album_id='$album_id'";
+        $query = "DELETE FROM movie WHERE movie_id=:movie_id and album_id=:album_id";
 
         $a = $this->movie_exist($movie_id, $album_id);
         if($a){
             $statement = $this->pdo->prepare($query);
 
-
+        var_dump($query);
             return $statement->execute([
                 'movie_id' => $movie_id,
                 'album_id' => $album_id
