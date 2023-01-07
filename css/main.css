@@ -573,6 +573,11 @@ video {
   margin-bottom: 50px;
 }
 
+.my-\[80px\] {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
 .block {
   display: block;
 }
@@ -603,6 +608,10 @@ video {
 
 .gap-4 {
   gap: 1rem;
+}
+
+.gap-8 {
+  gap: 2rem;
 }
 
 .rounded {

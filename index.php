@@ -15,62 +15,104 @@ session_start() ?>
 </head>
 <body>
 <p class="text-red-500">Bonjour, <?php echo $_SESSION['name'] ?></p>
-<form method="POST">
-    <label for="28">Action</label>
-    <input name="genre[]" type="checkbox" value="28">
-    <label>Adventure</label>
-    <input name="genre[]" type="checkbox" value="12">
-    <label>Animation</label>
-    <input name="genre[]" type="checkbox" value="16">
-    <label>Comedy</label>
-    <input name="genre[]" type="checkbox" value="35">
-    <label>Crime</label>
-    <input name="genre[]" type="checkbox" value="80">
-    <label>Documentary</label>
-    <input name="genre[]" type="checkbox" value="99">
-    <label>Drama</label>
-    <input name="genre[]" type="checkbox" value="18">
-    <label>Family</label>
-    <input name="genre[]" type="checkbox" value="10751">
-    <label>Fantasy</label>
-    <input name="genre[]" type="checkbox" value="14">
-    <label>History</label>
-    <input name="genre[]" type="checkbox" value="36">
-    <label>Horror</label>
-    <input name="genre[]" type="checkbox" value="27">
-    <label>Music</label>
-    <input name="genre[]" type="checkbox" value="10402">
-    <label>Mystery</label>
-    <input name="genre[]" type="checkbox" value="9648">
-    <label>Romance</label>
-    <input name="genre[]" type="checkbox" value="10749">
-    <label>Science Fiction</label>
-    <input name="genre[]" type="checkbox" value="878">
-    <label>TV Movie</label>
-    <input name="genre[]" type="checkbox" value="10770">
-    <label>Thriller</label>
-    <input name="genre[]" type="checkbox" value="53">
-    <label>War</label>
-    <input name="genre[]" type="checkbox" value="10752">
-    <label>Western</label>
-    <input name="genre[]" type="checkbox" value="37">
+<section>
+    <form method="POST">
+        <div>
+            <label for="28">Action</label>
+            <input name="genre[]" type="checkbox" value="28">
+        </div>
+        <div>
+            <label>Adventure</label>
+            <input name="genre[]" type="checkbox" value="12">
+        </div>
+        <div>
+            <label>Animation</label>
+            <input name="genre[]" type="checkbox" value="16">
+        </div>
+        <div>
+            <label>Comedy</label>
+            <input name="genre[]" type="checkbox" value="35">
+        </div>
+        <div>
+            <label>Crime</label>
+            <input name="genre[]" type="checkbox" value="80">
+        </div>
+        <div>
+            <label>Documentary</label>
+            <input name="genre[]" type="checkbox" value="99">
+        </div>
+        <div>
+            <label>Drama</label>
+            <input name="genre[]" type="checkbox" value="18">
+        </div>
+        <div>
+            <label>Family</label>
+            <input name="genre[]" type="checkbox" value="10751">
+        </div>
+        <div>
+            <label>Fantasy</label>
+            <input name="genre[]" type="checkbox" value="14">
+        </div>
+        <div>
+            <label>History</label>
+            <input name="genre[]" type="checkbox" value="36">
+        </div>
+        <div>
+            <label>Horror</label>
+            <input name="genre[]" type="checkbox" value="27">
+        </div>
+        <div>
+            <label>Music</label>
+            <input name="genre[]" type="checkbox" value="10402">
+        </div>
+        <div>
+            <label>Mystery</label>
+            <input name="genre[]" type="checkbox" value="9648">
+        </div>
+        <div>
+            <label>Romance</label>
+            <input name="genre[]" type="checkbox" value="10749">
+        </div>
+        <div>
+            <label>Science Fiction</label>
+            <input name="genre[]" type="checkbox" value="878">
+        </div>
+        <div>
+            <label>TV Movie</label>
+            <input name="genre[]" type="checkbox" value="10770">
+        </div>
+        <div>
+            <label>Thriller</label>
+            <input name="genre[]" type="checkbox" value="53">
+        </div>
+        <div>
+            <label>War</label>
+            <input name="genre[]" type="checkbox" value="10752">
+        </div>
+        <div>
+            <label>Western</label>
+            <input name="genre[]" type="checkbox" value="37">
+        </div>
 
-    <label for="">Select the popularity order :</label>
-    <select name="pop" value="pop">
-        <option value="desc" >Descending</option>
-        <option value="asc" >Ascending</option>
-    </select>
+        <div>
+            <label for="">Select the popularity order :</label>
+            <select name="pop" value="pop">
+                <option value="desc" >Descending</option>
+                <option value="asc" >Ascending</option>
+            </select>
+        </div>
+        <div>
+            <label for="">Do you want film including -18 limitation ?</label>
+            <input type="checkbox" name="adult" value="true">
+        </div>
+        <div>
+            <label for="">Select the minimum score you want on Avis IMDB rating (0-10) </label>
+            <input type="number" name="imdb">
+        </div>
 
-    <label for="">Do you want film including -18 limitation ?</label>
-    <input type="checkbox" name="adult" value="true">
-
-    <label for="">Select the minimum score you want on Avis IMDB rating (0-10) </label>
-    <input type="number" name="imdb">
-
-
-    <input type="submit" >
-</form>
-
+        <input type="submit" >
+    </form>
+</section>
 
 <?php
 require_once 'FilmApi.php';
@@ -114,7 +156,7 @@ if ($_POST) {
     $films_ordered = json_decode($data);
 }
 ?>
-<section class="grid grid-cols-4 gap-6 mx-[150px] my-[50px]">
+<section class="grid grid-cols-4 gap-8 mx-[150px] my-[50px]">
     <?php foreach ($films_ordered->results as $film){ ?>
         <div class="flex flex-col bg-white shadow-lg border-current">
             <a href="SinglePage.php">
