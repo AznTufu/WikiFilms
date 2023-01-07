@@ -35,9 +35,55 @@ class Connection
 
     }
 
-    public function login($mail, $pass):bool
+    public function insert_album(Album $album): bool
     {
-        $query = "SELECT * FROM user WHERE email='$mail' and password='".md5($pass . 'ALotOfSalt')."'";
+        $query = 'INSERT INTO album (name, description, private, user_id )
+                    VALUES (:name, :description, :private, :user_id )';
+
+        $a = $this->album_exist($album->name, $album->user_id);
+
+        if ($a) {
+            echo 'Un album avec ce nom existe déja';
+            return false;
+        } else {
+            $statement = $this->pdo->prepare($query);
+
+            return $statement->execute([
+                'name' => $album->name,
+                'description' => $album->description,
+                'private' => $album->private,
+                'user_id' => $album->user_id
+            ]);
+
+
+        }
+
+
+    }
+
+    public function album_exist($name, $user_id): bool
+    {
+        $query = "SELECT * FROM album WHERE name='$name' and user_id='$user_id'";
+
+        $statement = $this->pdo->prepare($query);
+
+        $statement->execute();
+
+        $album = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+        if ($album == Null) {
+            return false;
+        } else {
+            return true;
+        }
+
+
+    }
+
+    public function login($mail, $pass): bool
+    {
+        $query = "SELECT * FROM user WHERE email='$mail' and password='" . md5($pass . 'ALotOfSalt') . "'";
 
         $statement = $this->pdo->prepare($query);
 
@@ -45,14 +91,25 @@ class Connection
 
         $user = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        if($statement->rowCount() === 1){
-            $_SESSION['name']=$user[0]["first_name"];
-            $_SESSION['id']=$user[0]["id"];
+        if ($statement->rowCount() === 1) {
+            $_SESSION['name'] = $user[0]["first_name"];
+            $_SESSION['id'] = $user[0]["id"];
             return true;
-        }
-        else{
+        } else {
             return false;
         }
+
+    }
+
+    public function show_album($user_id): array
+    {
+        $query = "SELECT * FROM album WHERE user_id='$user_id'";
+
+        $statement = $this->pdo->prepare($query);
+
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
 
     }
 
