@@ -113,4 +113,63 @@ class Connection
 
     }
 
+    public function get_album_id($name, $user_id):int
+    {
+
+        $query = "SELECT * FROM album WHERE name='$name' and user_id='$user_id'";
+
+        $statement = $this->pdo->prepare($query);
+
+        $statement->execute();
+
+        $album = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $album[0]["id"];
+
+    }
+
+    public function movie_exist($movie_id, $album_id)
+    {
+        $query = "SELECT * FROM movie WHERE movie_id='$movie_id' and album_id='$album_id'";
+
+        $statement = $this->pdo->prepare($query);
+
+        $statement->execute();
+
+        $movie = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+        if ($movie == Null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function insert_movie(Movie $movie): bool
+    {
+
+        $query = 'INSERT INTO movie (movie_id, album_id )
+                    VALUES (:movie_id, :album_id )';
+
+        $a = $this->movie_exist($movie->movie_id, $movie->album_id);
+
+        if ($a) {
+            echo 'Vous avez deja un film dans cet album';
+            return false;
+        } else {
+            $statement = $this->pdo->prepare($query);
+
+            return $statement->execute([
+                'movie_id' => $movie->movie_id,
+                'album_id' => $movie->album_id
+            ]);
+
+
+        }
+
+
+
+    }
+
 }
