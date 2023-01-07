@@ -56,12 +56,12 @@ class Connection
             ]);
 
 
-    }
+        }
 
 
     }
 
-    public function album_exist($name, $user_id):bool
+    public function album_exist($name, $user_id): bool
     {
         $query = "SELECT * FROM album WHERE name='$name' and user_id='$user_id'";
 
@@ -72,33 +72,18 @@ class Connection
         $album = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
-
-        if($album==Null){
+        if ($album == Null) {
             return false;
-        }
-        else{
+        } else {
             return true;
         }
 
-        /*
-        if($statement->rowCount() === 1){
-
-            $_SESSION['name']=$album[0]["first_name"];
-            $_SESSION['id']=$album[0]["id"];
-            return true;
-
-        }
-        else{
-            return false;
-        }
-
-        */
 
     }
 
-    public function login($mail, $pass):bool
+    public function login($mail, $pass): bool
     {
-        $query = "SELECT * FROM user WHERE email='$mail' and password='".md5($pass . 'ALotOfSalt')."'";
+        $query = "SELECT * FROM user WHERE email='$mail' and password='" . md5($pass . 'ALotOfSalt') . "'";
 
         $statement = $this->pdo->prepare($query);
 
@@ -106,17 +91,26 @@ class Connection
 
         $user = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        if($statement->rowCount() === 1){
-            $_SESSION['name']=$user[0]["first_name"];
-            $_SESSION['id']=$user[0]["id"];
+        if ($statement->rowCount() === 1) {
+            $_SESSION['name'] = $user[0]["first_name"];
+            $_SESSION['id'] = $user[0]["id"];
             return true;
-        }
-        else{
+        } else {
             return false;
         }
 
     }
 
+    public function show_album($user_id): array
+    {
+        $query = "SELECT * FROM album WHERE user_id='$user_id'";
 
+        $statement = $this->pdo->prepare($query);
+
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
 
 }
