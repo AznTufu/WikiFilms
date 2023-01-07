@@ -164,12 +164,34 @@ class Connection
                 'movie_id' => $movie->movie_id,
                 'album_id' => $movie->album_id
             ]);
+        }
+    }
 
 
+    public function delete_film_in_album($movie_id, $album_id): bool
+    {
+        $query = "DELETE FROM movie WHERE movie_id='$movie_id' and album_id='$album_id'";
+
+        $a = $this->movie_exist($movie_id, $album_id);
+        if($a){
+            $statement = $this->pdo->prepare($query);
+
+
+            return $statement->execute([
+                'movie_id' => $movie_id,
+                'album_id' => $album_id
+            ]);
+        }
+        else{
+            echo "Vous n'avez pas de film avec ce nom dans cet album";
+            return false;
         }
 
 
-
     }
+
+
+
+
 
 }
