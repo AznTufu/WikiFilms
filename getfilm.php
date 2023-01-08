@@ -9,6 +9,7 @@ $response = $client->request('GET', "https://api.themoviedb.org/3/search/movie/?
 
 
 header('Content-type:application/json;charset=utf-8');
+header('Access-Control-Allow-Origin: *');
 echo json_encode(json_decode($response->getBody())->results);
 
 

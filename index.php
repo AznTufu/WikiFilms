@@ -1,6 +1,5 @@
 <?php use FilmApi\FilmApi;
 require_once 'vendor/autoload.php';
-
 session_start() ?>
 <!doctype html>
 <html lang="en">
@@ -10,10 +9,9 @@ session_start() ?>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
     <link rel="stylesheet" href="css/main.css">
-    <title>Document</title>
+    <title>Document</title> 
 </head>
-<body>
-<input type="text" class="recherche">
+<body class="bg-[#F5F6F7]">
 <p class="text-red-500">Bonjour, <?php echo $_SESSION['name'] ?></p>
 
 <?php
@@ -56,11 +54,16 @@ if ($_POST) {
     $films_ordered = json_decode($data);
 }
 ?>
-
+<input type="text" class="recherche">
+<div class="grid grid-cols-4">
+    <?php foreach ($films_ordered->results as $film){ ?>
+        <div class="container"></div>
+    <?php } ?>
+</div>
 <div class="flex gap-8 mx-[140px] my-[50px]">
-    <section class="grid grid-cols-4 gap-8 container">
+    <section class="grid grid-cols-4 gap-8">
         <?php foreach ($films_ordered->results as $film){ ?>
-            <div class="flex flex-col bg-white shadow-lg border-current">
+            <div class="flex flex-col bg-white shadow-lg border-current container">
                 <?php $id_film=$film->id; ?>
                 <a href="SinglePage.php?film_id=<?php echo $id_film ?>">
                     <?php if($film->backdrop_path == Null){ ?>
@@ -137,7 +140,7 @@ if ($_POST) {
     </section>
     <section>
         <form method="POST">
-            <div class="bg-white-500 shadow-lg border-2 h-[500px] w-[350px] p-6">
+            <div class="bg-white shadow-lg border-2 h-[500px] w-[350px] p-6">
                 <div class="grid grid-cols-2 gap-1">
                     <div>
                         <label for="28">Action</label>
