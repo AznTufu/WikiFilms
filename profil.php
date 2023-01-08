@@ -63,32 +63,30 @@ if($_POST){
 
 ?>
 <div>
+    <?php
 
+    $user_id=$_SESSION['id'];
+    $connection = new Connection();
+    $result_album = $connection->show_album($user_id);
 
-<?php
+    if($result_album==Null){
+        echo "Vous n'avez pas encore créer d'album. ";
+    }
+    else{ ?>
+        <div>
 
-$user_id=$_SESSION['id'];
-$connection = new Connection();
-$result_album = $connection->show_album($user_id);
+            <?php
 
-if($result_album==Null){
-    echo "Vous n'avez pas encore créer d'album. ";
-}
-else{ ?>
-    <div>
+            foreach ($result_album as $album_data) {
+                echo $album_data["name"];
+                echo $album_data["description"];
+                echo $album_data["private"];
+            }
 
-        <?php
+            ?>
+        </div>
 
-        foreach ($result_album as $album_data) {
-            echo $album_data["name"];
-            echo $album_data["description"];
-            echo $album_data["private"];
-        }
-
-        ?>
-    </div>
-
-<?php } ?>
+    <?php } ?>
 </div>
 
 </body>
