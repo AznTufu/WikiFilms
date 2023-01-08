@@ -115,7 +115,7 @@ if ($_POST) {
     $films_ordered = json_decode($data);
 }
 ?>
-<section class="grid grid-cols-4 gap-6 mx-[150px] my-[50px]">
+<section class="grid grid-cols-4 gap-6 mx-[150px] my-[50px] container">
     <?php foreach ($films_ordered->results as $film){ ?>
         <div class="flex flex-col bg-white shadow-lg border-current">
             <?php $id_film=$film->id; ?>
