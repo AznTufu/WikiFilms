@@ -121,7 +121,7 @@ if ($_POST) {
                             </p>
                         </div>
                         <div class="flex gap-4 pt-1 items-center">
-                            <p> <i class="fa-solid fa-star opacity-50"></i> <?php echo $film->vote_average ?></p>
+                            <p> <i class="fa-solid fa-star opacity-50"></i> <?php echo substr($film->vote_average,0,3) ?></p>
                             <p> <i class="fa-solid fa-eye opacity-50"></i> <?php echo $film->popularity ?></p>
                             <p>
                                 <?php if ($film->adult == Null) {
@@ -138,7 +138,7 @@ if ($_POST) {
     </section>
     <section>
         <form method="POST">
-            <div class="bg-white-500 shadow-lg border-2 h-[500px] w-[400px] p-6">
+            <div class="bg-white-500 shadow-lg border-2 h-[500px] w-[350px] p-6">
                 <div class="grid grid-cols-2 gap-1">
                     <div>
                         <label for="28">Action</label>
