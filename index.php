@@ -58,7 +58,7 @@ if ($_POST) {
 ?>
 
 <div class="flex gap-8 mx-[140px] my-[50px]">
-    <section class="grid grid-cols-4 gap-8">
+    <section class="grid grid-cols-4 gap-8 container">
         <?php foreach ($films_ordered->results as $film){ ?>
             <div class="flex flex-col bg-white shadow-lg border-current">
                 <?php $id_film=$film->id; ?>
