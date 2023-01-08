@@ -55,14 +55,15 @@ $films_ordered = json_decode($data);
         <div class="flex items center gap-1">
             <p><?php echo (intval($films_ordered->runtime/60) . "h ". $films_ordered->runtime%60) . "m"; ?> </p>
             <p class="font-semibold">
+            <?php foreach ($films_ordered->genres as $filmName) { ?>
                 <?php
-                    if($films_ordered->genres == Null){
-                        echo 'No data';
-                    }
-                    else{
-                        echo $films_ordered->genres->name;
-                    }
-                ?>
+                if ($films_ordered->genres == Null) {
+                    echo 'No data';
+                } else {
+                    echo $filmName->name;
+                }
+            }
+            ?>
             </p>
             <p>
                 <?php if ($films_ordered->adult == Null) {
