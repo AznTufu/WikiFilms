@@ -12,7 +12,7 @@ session_start() ?>
     <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
 </head>
-<body>
+<body class="bg-[#F5F6F7]">
 
 <?php $film_id = $_GET["film_id"];
 
@@ -24,57 +24,86 @@ $data = $api->Movie_id($film_id);
 $films_ordered = json_decode($data);
 
 ?>
-<section>
-    <?php 
-        if($films_ordered->backdrop_path == Null){ ?>
-            <img src="img/question_mark.jpg" alt="" >
-        <?php }
-        else{ ?>
-                <img class="object-cover h-[90vh] w-[90vw]" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->backdrop_path ?>" alt="background image">
-        <?php }
-        
-        if($films_ordered->poster_path == Null){ ?>
-            <img src="img/question_mark.jpg" alt="" >
-        <?php }
-        else{ ?>
-            <img src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->poster_path ?>" alt="" >
-        <?php }?>
-        <?php if ($films_ordered->belongs_to_collection == null) {
-    } else { ?>
-        <img src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->belongs_to_collection->poster_path; ?>" alt="">
-    <?php } ?>
-
-    <h1 class="text-xl text-[#212c36] font-bold"><?php echo $films_ordered->title; ?> </h1>
-    <div>
-        <div class="flex items-center gap-1">
-            <p> <i class="fa-solid fa-star text-yellow-500"></i> </p> 
-            <p> <?php echo substr($films_ordered->vote_average,0,3) ?></p>
-            <p>|</p>
-            <p><?php echo $films_ordered->vote_count; ?> </p>
+<section class="flex justify-center rounded-3xl">
+    <div class="flex flex-row bg-[#17181C] text-white shadow-lg border-current rounded-lg w-[965px] lg:w-[1285px] lg:mb-12 ">
+        <?php 
+            if(($films_ordered->poster_path and $films_ordered->belongs_to_collection) === Null) { ?>
+                <img src="img/question_mark.jpg" alt="Missing image">
+            <?php } else {
+                if ($films_ordered->belongs_to_collection == null) { ?>
+                    <img class="rounded-l-lg" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->poster_path ?>" alt="" >
+                <?php } else { ?>
+                    <img class="rounded-l-lg" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->belongs_to_collection->poster_path; ?>" alt="">
+                <?php } 
+            } 
+        ?>
+        <div class="flex flex-col justify-center ml-4">
+            <div>
+                <h1 class="text-5xl font-bold py-8"><?php echo $films_ordered->title; ?> </h1>
+                <div class="flex items-center gap-10 pb-10 text-lg font-semibold">
+                    <div class="flex items-center gap-2 ml-8">
+                        <p> <i class="fa-solid fa-star text-yellow-500"></i> </p> 
+                        <p class="text-2xl"> <?php echo substr($films_ordered->vote_average,0,3) ?></p>
+                        <div class="h-5 w-0.5 bg-white"></div>
+                        <p><?php echo $films_ordered->vote_count; ?> </p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <p><?php echo (intval($films_ordered->runtime/60) . "h ". $films_ordered->runtime%60) . "m"; ?> </p>
+                        <div class="h-2 w-2 rounded-full bg-white"></div>
+                        <p>
+                        <?php foreach ($films_ordered->genres as $filmName) { ?>
+                        <?php if ($films_ordered->genres == Null) {
+                                echo 'No data';
+                            } else {
+                                echo $filmName->name;
+                            }
+                        } ?>
+                        </p>
+                        <div class="h-2 w-2 rounded-full bg-white"></div>
+                        <p>
+                            <?php if (isset($films_ordered->release_date)){
+                                if($films_ordered->release_date == Null){
+                                    echo 'No data';
+                                }
+                                else{
+                                    echo substr($films_ordered->release_date,0,4);
+                                }}
+                            elseif (isset($films_ordered->first_air_date)){
+                                if ($films_ordered->first_air_date == Null){
+                                    echo 'No data';
+                                }
+                                else
+                                    echo substr($films_ordered->first_air_date,0,4);
+                                }
+                            else{
+                                echo 'release date infound';
+                            }
+                            ?>
+                        </p>
+                        <p>
+                            <?php if ($films_ordered->adult == Null) {
+                            }
+                            else{ ?>
+                                <div class="h-2 w-2 rounded-full bg-white"></div>
+                                <?php echo 'Adult content +18';
+                            }?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-12 pb-8 w-[343px] lg:w-[600px]">
+                <h2 class="text-xl font-bold">The STORY</h2>
+                <p class="font-base"><?php echo $films_ordered->overview; ?> </p>
+            </div>
+            <div class="flex gap-9 w-[343px] lg:w-[600px]">
+                <?php if (($films_ordered->poster_path and $films_ordered->backdrop_path) == null) {
+                } else { ?>
+                    <h2 class="text-xl font-bold">POSTER</h2>
+                    <img class="object-cover w-48 gap-2" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->poster_path ?>" alt="" >
+                    <img class="object-contain w-48 gap-2" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->backdrop_path ?>" alt="" >
+                <?php } ?>
+            </div>
         </div>
-        <div class="flex items center gap-1">
-            <p><?php echo (intval($films_ordered->runtime/60) . "h ". $films_ordered->runtime%60) . "m"; ?> </p>
-            <p class="font-semibold">
-                <?php
-                    if($films_ordered->genres == Null){
-                        echo 'No data';
-                    }
-                    else{
-                        echo $films_ordered->genres->name;
-                    }
-                ?>
-            </p>
-            <p>
-                <?php if ($films_ordered->adult == Null) {
-                }
-                else{
-                    echo 'Adult content +18';
-                }?>
-            </p>
-        </div>
-    </div>
-    <p><?php echo $films_ordered->overview; ?> </p>
-    <p><?php echo $films_ordered->tagline; ?> </p>
     </div>
 </section>
 <form method="POST">
@@ -170,4 +199,11 @@ if ($_POST){
             </div>
         <?php } ?>
     </div>
+<section>
+    <div class="flex flex-row justify-between items-center mt-[5rem] mx-auto pb-[10vh] border-t-4 border-[#333] text-lg text-[#333] max-w-[1600px]">
+        <div class="mt-4"> @2022-2023 </div>
+        <div> Tony Zhang & Romain Parisot</div>
+        <div><a href="https://github.com/AznTufu/WikiFilms" target="_blank">Github</a></div>
+    </div>
+</section>
 </body>
