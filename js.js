@@ -11,6 +11,8 @@ recherche.addEventListener('input', (e)=>{
         console.log(response)
         response.data.forEach(film=>{
             container.innerHTML+=film.title
+
+
         })
         }
     )

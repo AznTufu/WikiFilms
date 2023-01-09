@@ -60,6 +60,34 @@ class Connection
 
 
     }
+    public function insert_default_album(Album $album): bool
+    {
+        $query = 'INSERT INTO album (name, description, private, user_id )
+                    VALUES (:name, :description, :private, :user_id )';
+
+
+            $statement = $this->pdo->prepare($query);
+
+            $a=false;
+
+        if ($a) {
+            echo 'Un album avec ce nom existe déja';
+            return false;
+        } else {
+            $statement = $this->pdo->prepare($query);
+
+            return $statement->execute([
+                'name' => $album->name,
+                'description' => $album->description,
+                'private' => $album->private,
+                'user_id' => $album->user_id
+            ]);
+
+
+        }
+
+
+        }
 
     public function album_exist($name, $user_id): bool
     {
@@ -176,7 +204,7 @@ class Connection
         if($a){
             $statement = $this->pdo->prepare($query);
 
-        var_dump($query);
+
             return $statement->execute([
                 'movie_id' => $movie_id,
                 'album_id' => $album_id
