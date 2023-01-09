@@ -56,11 +56,8 @@ if ($_POST) {
 ?>
 <input type="text" class="recherche">
 
-<div class="flex gap-8 mx-[140px] my-[50px]">
-    <?php foreach ($films_ordered->results as $film){ ?>
-            <?php $id_film=$film->id; ?>
-                <div class="grid grid-cols-2 gap-2 container"></div>
-    <?php } ?>
+<div class="flex justify-center mx-[140px] my-[50px]">
+    <div class="grid grid-cols-4 w gap-4 container"></div>
 </div>
 
 <div class="flex gap-8 mx-[140px] my-[50px]">
@@ -70,10 +67,10 @@ if ($_POST) {
                 <?php $id_film=$film->id; ?>
                 <a href="SinglePage.php?film_id=<?php echo $id_film ?>">
                     <?php if($film->poster_path == Null){ ?>
-                        <img src="img/question_mark.jpg" alt="" >
+                        <img src="img/question_mark.jpg" alt="image">
                     <?php }
                     else{ ?>        
-                        <img src="https://image.tmdb.org/t/p/w500<?php echo $film->poster_path ?>" alt="" >
+                        <img src="https://image.tmdb.org/t/p/w500<?php echo $film->poster_path ?>" alt="image" >
                     <?php }?>
                     <div class="px-4 py-2">
                         <h3 class="text-xl text-[#212c36] font-bold">

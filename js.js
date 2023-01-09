@@ -10,10 +10,11 @@ recherche.addEventListener('input', (e)=>{
         }
         console.log(response)
         response.data.forEach(film=>{
-            let a = document.createElement('a')
-            let div = document.createElement('div')
-            let container = document.querySelector('.container')
             let url = document.createElement('img')
+            let div = document.createElement('div')
+            let a = document.createElement('a')
+            
+            a.className = 'flex items-start justify-center';
 
             if(film.poster_path == null){
                 url.src = "img/question_mark.jpg" 

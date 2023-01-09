@@ -653,6 +653,14 @@ video {
   clear: none;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
+.m-4 {
+  margin: 1rem;
+}
+
 .mx-\[140px\] {
   margin-left: 140px;
   margin-right: 140px;
@@ -686,6 +694,10 @@ video {
 
 .mt-2 {
   margin-top: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
 }
 
 .box-border {
@@ -1324,12 +1336,12 @@ video {
   justify-items: stretch;
 }
 
-.gap-8 {
-  gap: 2rem;
-}
-
 .gap-2 {
   gap: 0.5rem;
+}
+
+.gap-8 {
+  gap: 2rem;
 }
 
 .gap-1 {
@@ -1350,6 +1362,10 @@ video {
 
 .gap-9 {
   gap: 2.25rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
@@ -1775,6 +1791,11 @@ video {
 .bg-\[rgb\(255\2c 0\2c 0\)\] {
   --tw-bg-opacity: 1;
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
 .decoration-slice {

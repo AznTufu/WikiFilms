@@ -31,9 +31,9 @@ $films_ordered = json_decode($data);
                 <img src="img/question_mark.jpg" alt="Missing image">
             <?php } else {
                 if ($films_ordered->belongs_to_collection == null) { ?>
-                    <img class="rounded-l-lg" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->poster_path ?>" alt="" >
+                    <img class="rounded-l-lg" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->poster_path ?>" alt="poster image" >
                 <?php } else { ?>
-                    <img class="rounded-l-lg" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->belongs_to_collection->poster_path; ?>" alt="">
+                    <img class="rounded-l-lg" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->belongs_to_collection->poster_path; ?>" alt="poster image">
                 <?php } 
             } 
         ?>
@@ -95,12 +95,15 @@ $films_ordered = json_decode($data);
                 <h2 class="text-xl font-bold">The STORY</h2>
                 <p class="font-base"><?php echo $films_ordered->overview; ?> </p>
             </div>
-            <div class="flex gap-9 w-[343px] lg:w-[600px]">
+            <div class="flex gap-9 w-[343px] lg:w-[600px] items-start">
                 <?php if (($films_ordered->poster_path and $films_ordered->backdrop_path) == null) {
                 } else { ?>
                     <h2 class="text-xl font-bold">POSTER</h2>
-                    <img class="object-cover w-48 gap-2" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->poster_path ?>" alt="" >
-                    <img class="object-contain w-48 gap-2" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->backdrop_path ?>" alt="" >
+                    <img class="object-cover w-48 gap-2" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->poster_path ?>" alt="poster image" >
+                    <div class="flex flex-col">
+                        <img class="object-contain w-48 gap-2 mb-4" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->backdrop_path ?>" alt="poster image" >
+                        <img class="object-contain w-48 gap-2" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->belongs_to_collection->backdrop_path ?>" alt="poster image" >
+                    </div>
                 <?php } ?>
             </div>
         </div>
