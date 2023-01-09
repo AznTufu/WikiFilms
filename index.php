@@ -55,18 +55,21 @@ if ($_POST) {
 }
 ?>
 <input type="text" class="recherche">
-<div class="grid grid-cols-4">
+
+<div class="flex gap-8 mx-[140px] my-[50px]">
     <?php foreach ($films_ordered->results as $film){ ?>
-        <div class="container"></div>
+            <?php $id_film=$film->id; ?>
+                <div class="grid grid-cols-2 gap-2 container"></div>
     <?php } ?>
 </div>
+
 <div class="flex gap-8 mx-[140px] my-[50px]">
     <section class="grid grid-cols-4 gap-8">
         <?php foreach ($films_ordered->results as $film){ ?>
-            <div class="flex flex-col bg-white shadow-lg border-current container">
+            <div class="flex flex-col bg-white shadow-lg border-current">
                 <?php $id_film=$film->id; ?>
                 <a href="SinglePage.php?film_id=<?php echo $id_film ?>">
-                    <?php if($film->backdrop_path == Null){ ?>
+                    <?php if($film->poster_path == Null){ ?>
                         <img src="img/question_mark.jpg" alt="" >
                     <?php }
                     else{ ?>        

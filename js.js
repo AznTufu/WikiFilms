@@ -10,14 +10,25 @@ recherche.addEventListener('input', (e)=>{
         }
         console.log(response)
         response.data.forEach(film=>{
-            const img = document.querySelector("img");
-            img.src = "https://image.tmdb.org/t/p/w500" + (container.innerHTML+=film.poster_path)
-            container.innerHTML+=film.title
-            container.innerHTML+=film.realease_date
-            container.innerHTML+=film.vote_average
-            container.innerHTML+=film.popularity
+            let a = document.createElement('a')
+            let div = document.createElement('div')
+            let container = document.querySelector('.container')
+            let url = document.createElement('img')
+
+            if(film.poster_path == null){
+                url.src = "img/question_mark.jpg" 
+            }
+            else{         
+                url.src = "https://image.tmdb.org/t/p/w500" + film.poster_path
+            }
+
+            a.href=`SinglePage.php?film_id=${film.id}`
+            div.appendChild(url)
+            a.appendChild(div)
+            container.appendChild(a)
         })
         }
+        
     )
 
 })
