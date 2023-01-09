@@ -22,8 +22,10 @@ $api = new FilmApi();
 $data = $api->OrderByTrendingDay();
 $films_ordered = json_decode($data);
 
+$title = "Trending day";
+
 if ($_POST) {
-    var_dump($_POST);
+    $title = "Vos résultats de recherche";
     if (isset($_POST['genre'])){
         $ids = $_POST['genre'];
     }
@@ -58,6 +60,10 @@ if ($_POST) {
 
 <div class="flex justify-center mx-[140px] my-[50px]">
     <div class="grid grid-cols-4 w gap-4 container"></div>
+</div>
+
+<div class="flex justify-center">
+    <h1 class="text-4xl font-bold py-4"> <?php echo $title ?> </h1>
 </div>
 
 <div class="flex gap-8 mx-[140px] my-[50px]">

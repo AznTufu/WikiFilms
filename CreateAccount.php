@@ -49,6 +49,38 @@ if($_POST){
         $result = $connection->insert($user);
         if ($result){
             echo 'Great ! We Create a account with your data.';
+
+            /*create album 2 default album */
+            $connection = new Connection();
+            $connection->login($_POST['email'], $_POST['password']);
+
+            require_once 'album.php';
+
+
+                $album = new Album(
+                    "Listes d'envie",
+                    "Dans cet album vous pouvez ajouter des films a votre liste d'envie",
+                    0,
+                    $_SESSION['id']
+                );
+
+                    $connection_album1 = new Connection();
+                    $connection_album1->insert_default_album($album);
+
+                $album2 = new Album(
+                    "Visionnes",
+                    "Dans cet album vous pouvez ajouter les films que vous avez visionné",
+                    0,
+                    $_SESSION['id']
+                );
+
+                $connection_album2 = new Connection();
+                $connection_album2->insert_default_album($album2);
+
+
+
+
+
             header("location: login.php");
         }
         else{

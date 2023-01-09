@@ -149,7 +149,7 @@ class FilmApi
 
     public function sendRequest($url){
         $client = new Client();
-        var_dump($url);
+
         $response = $client->get($url);
 
 
