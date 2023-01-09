@@ -122,14 +122,14 @@ if ($_POST) {
                                 ?>
                             </p>
                         </div>
-                        <div class="flex gap-4 pt-1 items-center">
+                        <div class="flex gap-2 pt-1 items-center">
                             <p> <i class="fa-solid fa-star opacity-50"></i> <?php echo substr($film->vote_average,0,3) ?></p>
                             <p> <i class="fa-solid fa-eye opacity-50"></i> <?php echo $film->popularity ?></p>
                             <p>
                                 <?php if ($film->adult == Null) {
                                 }
                                 else{
-                                    echo 'Adult content +18';
+                                    echo 'Adult content';
                                 }?>
                             </p>
                         </div>
@@ -243,6 +243,13 @@ if ($_POST) {
         </form>
     </section>
 </div>
+<section>
+    <div class="flex flex-row justify-between items-center mt-[5rem] mx-auto pb-[10vh] border-t-4 border-[#333] text-lg text-[#333] max-w-[1600px]">
+        <div class="mt-4"> @2022-2023 </div>
+        <div> Tony Zhang & Romain Parisot</div>
+        <div><a href="https://github.com/AznTufu/WikiFilms" target="_blank">Github</a></div>
+    </div>
+</section>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="js.js"></script>

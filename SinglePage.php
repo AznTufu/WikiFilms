@@ -199,4 +199,11 @@ if ($_POST){
             </div>
         <?php } ?>
     </div>
+<section>
+    <div class="flex flex-row justify-between items-center mt-[5rem] mx-auto pb-[10vh] border-t-4 border-[#333] text-lg text-[#333] max-w-[1600px]">
+        <div class="mt-4"> @2022-2023 </div>
+        <div> Tony Zhang & Romain Parisot</div>
+        <div><a href="https://github.com/AznTufu/WikiFilms" target="_blank">Github</a></div>
+    </div>
+</section>
 </body>

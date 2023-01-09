@@ -10,7 +10,12 @@ recherche.addEventListener('input', (e)=>{
         }
         console.log(response)
         response.data.forEach(film=>{
+            const img = document.querySelector("img");
+            img.src = "https://image.tmdb.org/t/p/w500" + (container.innerHTML+=film.poster_path)
             container.innerHTML+=film.title
+            container.innerHTML+=film.realease_date
+            container.innerHTML+=film.vote_average
+            container.innerHTML+=film.popularity
         })
         }
     )
