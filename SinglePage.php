@@ -36,31 +36,35 @@ $films_ordered = json_decode($data);
 </section>
 
 <section class="flex justify-center rounded-3xl">
-    <div class="flex flex-row bg-[#17181C] text-white shadow-lg border-current rounded-lg w-[965px] lg:w-[1285px] lg:mb-12 ">
+    <div class="flex flex-col lg:flex-row bg-[#17181C] text-white shadow-lg border-current rounded-lg w-[450px] mb-6 lg:w-[1285px] lg:mb-12 ">
         <?php 
             if(($films_ordered->poster_path and $films_ordered->belongs_to_collection) === Null) { ?>
                 <img src="img/question_mark.jpg" alt="Missing image">
             <?php } else {
                 if ($films_ordered->belongs_to_collection == null) { ?>
                     <img class="rounded-l-lg" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->poster_path ?>" alt="poster image" >
-                <?php } else { ?>
-                    <img class="rounded-l-lg" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->belongs_to_collection->poster_path; ?>" alt="poster image">
+                <?php } else { 
+                    if ($films_ordered->belongs_to_collection->poster_path == null) { ?>
+                        <img class="rounded-l-lg" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->poster_path ?>" alt="poster image" >
+                    <?php } else { ?>
+                        <img class="rounded-l-lg" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->belongs_to_collection->poster_path; ?>" alt="poster image">
                 <?php } 
+                } 
             } 
         ?>
         <div class="flex flex-col justify-center ml-4">
             <div>
-                <h1 class="text-5xl font-bold py-8"><?php echo $films_ordered->title; ?> </h1>
-                <div class="flex items-center gap-10 pb-10 text-lg font-semibold">
+                <h1 class="text-4xl lg:text-5xl font-bold py-8"><?php echo $films_ordered->title; ?> </h1>
+                <div class="flex items-start lg!items-center gap-10 pb-10 text-lg font-semibold">
                     <div class="flex items-center gap-2 ml-8">
                         <p> <i class="fa-solid fa-star text-yellow-500"></i> </p> 
-                        <p class="text-2xl"> <?php echo substr($films_ordered->vote_average,0,3) ?></p>
+                        <p class="text-wl lg:text-2xl"> <?php echo substr($films_ordered->vote_average,0,3) ?></p>
                         <div class="h-5 w-0.5 bg-white"></div>
                         <p><?php echo $films_ordered->vote_count; ?> </p>
                     </div>
-                    <div class="flex items-center gap-3">
+                    <div class="flex flex-col lg:flex-row max-lg:justify-center items-start lg:items-center gap-3">
                         <p><?php echo (intval($films_ordered->runtime/60) . "h ". $films_ordered->runtime%60) . "m"; ?> </p>
-                        <div class="h-2 w-2 rounded-full bg-white"></div>
+                        <div class="h-2 w-2 rounded-full bg-white hidden lg:block"></div>
                         <p>
                         <?php foreach ($films_ordered->genres as $filmName) { ?>
                         <?php if ($films_ordered->genres == Null) {
@@ -70,7 +74,7 @@ $films_ordered = json_decode($data);
                             }
                         } ?>
                         </p>
-                        <div class="h-2 w-2 rounded-full bg-white"></div>
+                        <div class="h-2 w-2 rounded-full bg-white hidden lg:block"></div>
                         <p>
                             <?php if (isset($films_ordered->release_date)){
                                 if($films_ordered->release_date == Null){
@@ -95,7 +99,7 @@ $films_ordered = json_decode($data);
                             <?php if ($films_ordered->adult == Null) {
                             }
                             else{ ?>
-                                <div class="h-2 w-2 rounded-full bg-white"></div>
+                                <div class="h-2 w-2 rounded-full bg-white hidden lg:block"></div>
                                 <?php echo 'Adult content +18';
                             }?>
                         </p>
@@ -106,17 +110,20 @@ $films_ordered = json_decode($data);
                 <h2 class="text-xl font-bold">The STORY</h2>
                 <p class="font-base"><?php echo $films_ordered->overview; ?> </p>
             </div>
-            <div class="flex gap-9 w-[343px] lg:w-[600px] items-start">
+            <div class="flex flex-col lg:flex-row gap-9 w-[343px] lg:w-[600px] lg:items-start">
                 <?php if (($films_ordered->poster_path and $films_ordered->backdrop_path) == null) {
                 } else { ?>
                     <h2 class="text-xl font-bold">POSTER</h2>
                     <img class="object-cover w-48 gap-2" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->poster_path ?>" alt="poster image" >
-                    <div class="flex flex-col">
+                    <div class="flex flex-col my-3">
                         <img class="object-contain w-48 gap-2 mb-4" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->backdrop_path ?>" alt="poster image" >
                         <?php if ($films_ordered->belongs_to_collection == null) {
-                        } else { ?>
-                        <img class="object-contain w-48 gap-2" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->belongs_to_collection->backdrop_path ?>" alt="poster image" >
-                        <?php }?>
+                        } else {
+                            if ($films_ordered->belongs_to_collection->backdrop_path == null) {
+                            } else { ?>
+                            <img class="object-contain w-48 gap-2" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->belongs_to_collection->backdrop_path ?>" alt="poster image" >
+                        <?php }
+                        }   ?>
                     </div>
                 <?php } ?>
             </div>
