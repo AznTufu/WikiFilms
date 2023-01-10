@@ -64,7 +64,7 @@ if($_POST){
 
 
                 $album = new Album(
-                    "Listes d'envie",
+                    "Liste d'envie",
                     "Dans cet album vous pouvez ajouter des films a votre liste d'envie",
                     1,
                     $_SESSION['id']
@@ -74,7 +74,7 @@ if($_POST){
                     $connection_album1->insert_default_album($album);
 
                 $album2 = new Album(
-                    "Visionnes",
+                    "Visionner",
                     "Dans cet album vous pouvez ajouter les films que vous avez visionné",
                     1,
                     $_SESSION['id']

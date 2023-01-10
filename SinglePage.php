@@ -217,7 +217,7 @@ if ($_POST){
         <h3 class="flex justify-center text-xl lg:text-2xl font-bold py-2 lg:py-0">Vous n'avez pas encore créé d'album.</h3>
     <?php }
     else{ ?>
-        <h2 class="flex justify-center text-4xl font-bold py-8">Vos album</h2>
+        <h2 class="flex justify-center text-4xl font-bold py-8">Vos albums</h2>
         <div class="flex flex-col lg:flex-row justify-center items-center gap-8 pb-4">
             <?php
             foreach ($result_album as $album_data) { ?>
