@@ -140,6 +140,17 @@ class Connection
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 
     }
+    public function show_film($user_id, $album_id): array
+    {
+        $query = "SELECT * FROM `movie` JOIN `album` ON `movie`.album_id = `album`.id WHERE user_id='$user_id' and album_id='$album_id'";
+
+        $statement = $this->pdo->prepare($query);
+
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
 
     public function get_album_id($name, $user_id):int
     {
@@ -194,6 +205,8 @@ class Connection
             ]);
         }
     }
+
+
 
 
     public function delete_film_in_album($movie_id, $album_id): bool

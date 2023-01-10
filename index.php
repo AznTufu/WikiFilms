@@ -188,6 +188,7 @@ if ($_POST) {
         </form>
     </section>
     <section class="grid xl:grid-cols-2 2xl:grid-cols-4 gap-8">
+
         <?php foreach ($films_ordered->results as $film){ ?>
             <div class="flex lg:flex-col bg-white shadow-lg border-current">
                 <?php $id_film=$film->id; ?>

@@ -86,7 +86,41 @@ if($_POST){
             <div class="shadow-lg flex flex-col justify-start items-center pt-10 bg-white rounded-[30px] w-[250px] h-[250px]">
                 <div class="flex justify-center text-xl lg:text-2xl font-bold pb-3"><?php echo $album_data["name"];?></div>
                 <div class="px-6 py-4"><?php echo $album_data["description"];?></div>
-                <div><?php echo $album_data["private"];?></div>
+                <?php
+                $connection = new Connection();
+                $result_movie = $connection->show_film($user_id, $album_data['id']);
+                if ($result_movie==null){
+                    echo 'Aucun film dans cet album';
+                }
+                else{
+                    require_once 'FilmApi.php';
+
+                    foreach ($result_movie as $curent_result_movie){
+                        $connection = new FilmApi();
+                        $result_movie_data = $connection->Movie_id($curent_result_movie["movie_id"]);
+                        $a = json_decode($result_movie_data);
+                        if (isset($a->title)){
+                            echo $a->title;
+                        }
+                        elseif (isset($a->name)){
+                            echo $a->name;
+                        }
+                        else{
+                            echo 'title infound';
+                        }
+
+
+
+
+                    }
+
+
+                }
+
+
+                ?>
+
+
             </div>
             <?php } ?>
         </div>

@@ -58,7 +58,7 @@ if($_POST){
             $connection = new Connection();
             $connection->login($_POST['email'], $_POST['password']);
             
-            header("location: login.php");
+
 
             require_once 'album.php';
 
@@ -66,7 +66,7 @@ if($_POST){
                 $album = new Album(
                     "Listes d'envie",
                     "Dans cet album vous pouvez ajouter des films a votre liste d'envie",
-                    0,
+                    1,
                     $_SESSION['id']
                 );
 
@@ -76,7 +76,7 @@ if($_POST){
                 $album2 = new Album(
                     "Visionnes",
                     "Dans cet album vous pouvez ajouter les films que vous avez visionné",
-                    0,
+                    1,
                     $_SESSION['id']
                 );
 
@@ -87,7 +87,7 @@ if($_POST){
 
 
 
-            // header("location: login.php");
+             header("location: login.php");
         }
         else{
             echo 'Database error';
