@@ -12,7 +12,7 @@
     <div class="flex justify-center items-center my-4 lg:my-5">
         <div class="shadow-lg flex flex-col justify-end items-center mx-4 my-4 lg:my-12 w-[450px] h-[650px] bg-white rounded-[30px] xl:w-[550px] xl:h-[600px]">
             <h2 class="flex justify-center text-3xl lg:text-4xl font-bold py-8">Create an account</h2>
-            <form method="POST" name="login">
+            <form method="POST">
                 <div class="flex justify-center flex-col lg:flex-row lg:gap-4">
                     <input class="px-6 py-0 gap-2.5 my-2 w-[275px] h-[56px] border-[#333] border-2 rounded-[30px] xl:w-[180px] xl:mr-4" type="text" name="firstname" placeholder="First name" required>
                     <input class="px-6 py-0 gap-2.5 my-2 w-[275px] h-[56px] border-[#333] border-2 rounded-[30px] xl:w-[180px] xl:mr-4" type="text" name="lastname" placeholder="Last name" required>

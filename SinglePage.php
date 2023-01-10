@@ -27,10 +27,10 @@ $films_ordered = json_decode($data);
 
 <section class="sticky bg-white shadow-lg border-current mb-8">
     <div class="flex items-center justify-between pl-8 pr-8 xl:pl-36 py-2 px-1 max-w-[1800px]">
-        <a href="index.php" class="w-[100px] ml-8 xl:ml-24 2xl:ml-34"><img src="img/logo.png" alt="logo"></a>
+        <a href="index.php" class="w-[50px] lg:w-[100px] ml-8 xl:ml-24 2xl:ml-34"><img src="img/logo.png" alt="logo"></a>
         <div>
-            <a href="profil.php" class="text-2xl font-semibold text-[#333] mr-10"><?php echo $_SESSION['name'] ?></a>
-            <a href="login.php"><i class="fa-solid fa-right-from-bracket mr-8 xl:mr-10 text-xl"></i></a>
+            <a href="profil.php" class="text-lg lg:text-2xl font-semibold text-[#333] mr-6 lg:mr-10"><?php echo $_SESSION['name'] ?></a>
+            <a href="login.php"><i class="fa-solid fa-right-from-bracket sm:mr-6 lg:mr-8 xl:mr-10 text-xl"></i></a>
         </div>
     </div>
 </section>
@@ -214,10 +214,11 @@ if ($_POST){
         <?php } ?>
     </div>
 <section>
-    <div class="flex flex-row justify-between items-center mt-[5rem] mx-auto pb-[10vh] border-t-4 border-[#333] text-lg text-[#333] max-w-[1600px]">
+    <div class="flex flex-col lg:flex-row justify-between items-center mt-[5rem] mx-auto pb-[10vh] border-t-4 border-[#333] text-lg text-[#333] max-w-[300px] sm:max-w-[700px] lg:max-w-[1600px]">
         <div class="mt-4"> @2022-2023 </div>
         <div> Tony Zhang & Romain Parisot</div>
         <div><a href="https://github.com/AznTufu/WikiFilms" target="_blank">Github</a></div>
     </div>
 </section>
 </body>
+</html>
