@@ -24,6 +24,17 @@ $data = $api->Movie_id($film_id);
 $films_ordered = json_decode($data);
 
 ?>
+
+<section class="sticky bg-white shadow-lg border-current mb-8">
+    <div class="flex items-center justify-between pl-8 pr-8 xl:pl-36 py-2 px-1 max-w-[1800px]">
+        <a href="index.php" class="w-[100px] ml-8 xl:ml-24 2xl:ml-34"><img src="img/logo.png" alt="logo"></a>
+        <div>
+            <a href="profil.php" class="text-2xl font-semibold text-[#333] mr-10"><?php echo $_SESSION['name'] ?></a>
+            <a href="login.php"><i class="fa-solid fa-right-from-bracket mr-8 xl:mr-10 text-xl"></i></a>
+        </div>
+    </div>
+</section>
+
 <section class="flex justify-center rounded-3xl">
     <div class="flex flex-row bg-[#17181C] text-white shadow-lg border-current rounded-lg w-[965px] lg:w-[1285px] lg:mb-12 ">
         <?php 

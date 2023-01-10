@@ -12,7 +12,6 @@ session_start() ?>
     <title>Document</title> 
 </head>
 <body class="bg-[#F5F6F7]">
-<p class="text-red-500">Bonjour, <?php echo $_SESSION['name'] ?></p>
 
 <?php
 require_once 'FilmApi.php';
@@ -56,13 +55,30 @@ if ($_POST) {
     $films_ordered = json_decode($data);
 }
 ?>
-<input type="text" class="recherche">
 
-<div class="flex justify-center mx-[140px] my-[50px]">
-    <div class="grid grid-cols-4 w gap-4 container"></div>
-</div>
+<section class="sticky bg-white shadow-lg border-current mb-8">
+    <div class="flex items-center justify-between pl-8 pr-8 xl:pl-36 py-2 px-1 max-w-[1800px]">
+        <a href="index.php" class="w-[100px] ml-8 xl:ml-24 2xl:ml-34"><img src="img/logo.png" alt="logo"></a>
+        <div>
+            <a href="profil.php" class="text-2xl font-semibold text-[#333] mr-10"><?php echo $_SESSION['name'] ?></a>
+            <a href="login.php"><i class="fa-solid fa-right-from-bracket mr-8 xl:mr-10 text-xl"></i></a>
+        </div>
+    </div>
+</section>
 
-<div class="flex justify-center">
+<section>
+    <div class="flex justify-center items-center my-14">
+        <div class="shadow-search flex justify-center items-center mx-4 my-16 w-[320px] h-[190px] bg-white rounded-[30px] lg:m-0 xl:mt-2 xl:w-[950px] xl:h-[105px]">
+            <input class="recherche flex flex-row items-center px-6 py-0 gap-2.5 w-[299px] h-[56px] bg-[#F3EDFB] rounded-[30px] xl:w-[842px] xl:mr-4" placeholder="Rechercher"></input>
+            <i class="fa-solid fa-magnifying-glass text-2xl"></i>
+        </div>
+    </div>
+
+    <div class="flex justify-center mx-[140px]">
+        <div class="grid grid-cols-4 w gap-4 container"></div>
+    </div>
+</section>
+<div class="flex justify-center mt-[30px]">
     <h1 class="text-4xl font-bold py-4"> <?php echo $title ?> </h1>
 </div>
 
