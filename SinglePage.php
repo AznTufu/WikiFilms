@@ -120,18 +120,31 @@ $films_ordered = json_decode($data);
         </div>
     </div>
 </section>
-<form method="POST">
 
+<form method="POST">
     <select name="deloradd" >
         <option value="add">Ajouter</option>
         <option value="delete">Suprimer</option>
     </select>
-
     <label for="">Entrer le nom de l'album dans lequel vous souhaitez Ajouter/Suprimer ce film</label>
     <input type="text" name="name">
-
     <input type="submit">
 </form>
+<div>
+    <div class="flex justify-center items-center my-4 lg:my-5">
+        <div class="shadow-lg flex flex-col justify-end items-center mx-4 my-4 lg:my-12 w-[450px] h-[450px] bg-white rounded-[30px] xl:w-[550px] xl:h-[480px]">
+            <h1 class="flex justify-center items-center text-2xl lg:text-4xl font-bold p-6 mb-12">Ajout / suppression d'un film</h1>
+            <form method="POST">
+                <input class="flex justify-center px-6 py-0 gap-2.5 mb-4 w-[275px] h-[56px] border-[#333] border-2 rounded-[30px] xl:w-[400px] xl:mr-4" type="text" name="name" placeholder="Nom d'un de vos albums" required>
+                <select class="flex justify-center px-6 py-0 gap-2.5 w-[275px] h-[56px] border-[#333] border-2 rounded-[20px] xl:w-[400px] xl:mr-4" name="deloradd" >
+                    <option value="add">Ajouter</option>
+                    <option value="delete">Suprimer</option>
+                </select>
+                <input class="flex justify-center px-6 py-0 gap-2.5 my-12 w-[275px] h-[56px] bg-[#F3EDFB] rounded-[30px] xl:w-[400px] xl:mr-4 shadow-md" type="submit" value="Modification de l'album">
+            </form> 
+        </div>
+    </div>
+</div>
 
 <?php
 require_once 'Movie.php';
@@ -158,9 +171,9 @@ if ($_POST){
             if ($movie->verify()) {
                 $connection = new Connection();
                 $result_movie = $connection->insert_movie($movie);
-                if ($result_movie) {
-                    echo 'Great ! We add this film to your album.';
-                } else {
+                if ($result_movie) { ?>
+                    <h3 class="flex justify-center text-xl lg:text-2xl font-bold py-2 lg:py-0">We add this film to your album.</h3>
+                <?php } else {
                     echo 'Database error';
                 }
             } else {
@@ -174,9 +187,9 @@ if ($_POST){
             if ($movie->verify()) {
                 $connection = new Connection();
                 $result_movie_del = $connection->delete_film_in_album($film_id, $result_album_id);
-                if ($result_movie_del) {
-                    echo 'Great ! We delete this film to your album.';
-                } else {
+                if ($result_movie_del) { ?>
+                    <h3 class="flex justify-center text-xl lg:text-2xl font-bold py-2 lg:py-0">We delete this film to your album.</h3>
+                <?php } else {
                     echo 'Database error';
                 }
             } else {
@@ -193,26 +206,30 @@ if ($_POST){
 }
 ?>
 
-    <h3>Vos album :</h3>
-    <div>
-        <?php
-        $user_id=$_SESSION['id'];
-        $connection = new Connection();
-        $result_album = $connection->show_album($user_id);
+<section>
+    <?php
+    $user_id=$_SESSION['id'];
+    $connection = new Connection();
+    $result_album = $connection->show_album($user_id);
 
-        if($result_album==Null){
-            echo "Vous n'avez pas encore créer d'album. ";
-        }
-        else{ ?>
-            <div>
-                <?php foreach ($result_album as $album_data) {
-                    echo $album_data["name"];
-                    echo $album_data["description"];
-                    echo $album_data["private"];
-                }?>
+    if($result_album==Null){ ?>
+        <h3 class="flex justify-center text-xl lg:text-2xl font-bold py-2 lg:py-0">Vous n'avez pas encore créé d'album.</h3>
+    <?php }
+    else{ ?>
+        <h2 class="flex justify-center text-4xl font-bold py-8">Vos album</h2>
+        <div class="flex flex-col lg:flex-row justify-center items-center gap-8 pb-4">
+            <?php
+            foreach ($result_album as $album_data) { ?>
+            <div class="shadow-lg flex flex-col justify-start items-center pt-10 bg-white rounded-[30px] w-[250px] h-[250px]">
+                <div class="flex justify-center text-xl lg:text-2xl font-bold pb-3"><?php echo $album_data["name"];?></div>
+                <div class="px-6 py-4"><?php echo $album_data["description"];?></div>
+                <div><?php echo $album_data["private"];?></div>
             </div>
-        <?php } ?>
-    </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
+</section>
+
 <section>
     <div class="flex flex-col lg:flex-row justify-between items-center mt-[5rem] mx-auto pb-[10vh] border-t-4 border-[#333] text-lg text-[#333] max-w-[300px] sm:max-w-[700px] lg:max-w-[1600px]">
         <div class="mt-4"> @2022-2023 </div>
