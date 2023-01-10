@@ -13,7 +13,8 @@ recherche.addEventListener('input', (e)=>{
             let url = document.createElement('img')
             let div = document.createElement('div')
             let a = document.createElement('a')
-            
+            div.className = 'max-lg:flex max-lg:justify-center w-[300px] max-lg:h-[300px]'
+            url.className = 'max-lg:bg-cover max-lg:bg-center'
             a.className = 'flex items-start justify-center';
 
             if(film.poster_path == null){

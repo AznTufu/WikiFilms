@@ -113,23 +113,17 @@ $films_ordered = json_decode($data);
                     <img class="object-cover w-48 gap-2" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->poster_path ?>" alt="poster image" >
                     <div class="flex flex-col">
                         <img class="object-contain w-48 gap-2 mb-4" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->backdrop_path ?>" alt="poster image" >
+                        <?php if ($films_ordered->belongs_to_collection == null) {
+                        } else { ?>
                         <img class="object-contain w-48 gap-2" src="https://image.tmdb.org/t/p/w500<?php echo $films_ordered->belongs_to_collection->backdrop_path ?>" alt="poster image" >
+                        <?php }?>
                     </div>
                 <?php } ?>
             </div>
         </div>
     </div>
 </section>
-
-<form method="POST">
-    <select name="deloradd" >
-        <option value="add">Ajouter</option>
-        <option value="delete">Suprimer</option>
-    </select>
-    <label for="">Entrer le nom de l'album dans lequel vous souhaitez Ajouter/Suprimer ce film</label>
-    <input type="text" name="name">
-    <input type="submit">
-</form>
+                            
 <div>
     <div class="flex justify-center items-center my-4 lg:my-5">
         <div class="shadow-lg flex flex-col justify-end items-center mx-4 my-4 lg:my-12 w-[450px] h-[450px] bg-white rounded-[30px] xl:w-[550px] xl:h-[480px]">

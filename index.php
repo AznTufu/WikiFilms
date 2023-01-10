@@ -67,25 +67,129 @@ if ($_POST) {
 </section>
 
 <section>
-    <div class="flex justify-center items-center my-14">
-        <div class="shadow-search flex justify-center items-center mx-4 my-16 w-[320px] h-[190px] bg-white rounded-[30px] lg:m-0 xl:mt-2 xl:w-[950px] xl:h-[105px]">
-            <input class="recherche flex flex-row items-center px-6 py-0 gap-2.5 w-[299px] h-[56px] bg-[#F3EDFB] rounded-[30px] xl:w-[842px] xl:mr-4" placeholder="Rechercher"></input>
+    <div class="flex justify-center items-center my-2 lg:mt-14">
+        <div class="shadow-search flex justify-center items-center mx-4 my-4 lg:my-16 w-[320px] h-[110px] lg:h-[190px] bg-white rounded-[30px] lg:m-0 xl:mt-2 lg:w-[950px] lg:h-[105px]">
+            <input class="recherche flex flex-row items-center px-6 py-0 gap-2.5 w-[250px] h-[56px] bg-[#F3EDFB] rounded-[30px] lg:w-[842px] mr-2 xl:mr-4" placeholder="Rechercher"></input>
             <i class="fa-solid fa-magnifying-glass text-2xl"></i>
         </div>
     </div>
 
-    <div class="flex justify-center mx-[140px]">
-        <div class="grid grid-cols-4 w gap-4 container"></div>
+    <div class="mx-[140px]">
+        <div class="grid lg:grid-cols-4 justify-center gap-4 container"></div>
     </div>
 </section>
-<div class="flex justify-center mt-[30px]">
-    <h1 class="text-4xl font-bold py-4"> <?php echo $title ?> </h1>
+<div class="flex justify-center mt-6 lg:mt-[20px]">
+    <h1 class="text-2xl lg:text-4xl font-bold py-4"> <?php echo $title ?> </h1>
 </div>
 
-<div class="flex gap-8 mx-[140px] my-[50px]">
-    <section class="grid grid-cols-4 gap-8">
+<div class="flex items-center lg:items-start flex-col lg:flex-row gap-8 mx-[140px] my-[30px] lg:my-[50px]">
+    <section class="lg:hidden">
+        <form method="POST">
+            <div class="bg-white shadow-lg border-2 mr-6 h-[500px] w-[320px] lg:w-[350px] p-6">
+                <div class="grid grid-cols-2 gap-1  ">
+                    <div>
+                        <label for="28">Action</label>
+                        <input name="genre[]" type="checkbox" value="28">
+                    </div>
+                    <div>
+                        <label>Adventure</label>
+                        <input name="genre[]" type="checkbox" value="12">
+                    </div>
+                    <div>
+                        <label>Animation</label>
+                        <input name="genre[]" type="checkbox" value="16">
+                    </div>
+                    <div>
+                        <label>Comedy</label>
+                        <input name="genre[]" type="checkbox" value="35">
+                    </div>
+                    <div>
+                        <label>Crime</label>
+                        <input name="genre[]" type="checkbox" value="80">
+                    </div>
+                    <div>
+                        <label>Documentary</label>
+                        <input name="genre[]" type="checkbox" value="99">
+                    </div>
+                    <div>
+                        <label>Drama</label>
+                        <input name="genre[]" type="checkbox" value="18">
+                    </div>
+                    <div>
+                        <label>Family</label>
+                        <input name="genre[]" type="checkbox" value="10751">
+                    </div>
+                    <div>
+                        <label>Fantasy</label>
+                        <input name="genre[]" type="checkbox" value="14">
+                    </div>
+                    <div>
+                        <label>History</label>
+                        <input name="genre[]" type="checkbox" value="36">
+                    </div>
+                    <div>
+                        <label>Horror</label>
+                        <input name="genre[]" type="checkbox" value="27">
+                    </div>
+                    <div>
+                        <label>Music</label>
+                        <input name="genre[]" type="checkbox" value="10402">
+                    </div>
+                    <div>
+                        <label>Mystery</label>
+                        <input name="genre[]" type="checkbox" value="9648">
+                    </div>
+                    <div>
+                        <label>Romance</label>
+                        <input name="genre[]" type="checkbox" value="10749">
+                    </div>
+                    <div>
+                        <label>Science Fiction</label>
+                        <input name="genre[]" type="checkbox" value="878">
+                    </div>
+                    <div>
+                        <label>TV Movie</label>
+                        <input name="genre[]" type="checkbox" value="10770">
+                    </div>
+                    <div>
+                        <label>Thriller</label>
+                        <input name="genre[]" type="checkbox" value="53">
+                    </div>
+                    <div>
+                        <label>War</label>
+                        <input name="genre[]" type="checkbox" value="10752">
+                    </div>
+                    <div>
+                        <label>Western</label>
+                        <input name="genre[]" type="checkbox" value="37">
+                    </div>
+                </div>
+                <div>
+                    <div class="pt-1">
+                        <label for="">Popularity:</label>
+                        <select name="pop" value="pop" >
+                            <option value="desc" >Descending</option>
+                            <option value="asc" >Ascending</option>
+                        </select>
+                    </div>
+                    <div class="pt-1">
+                        <label for="">Rating limitation (0-10) </label>
+                        <input type="number" name="imdb" class="border-solid border-2">
+                    </div>
+                    <div class="pt-1 pb-4">
+                        <label for="">Adult content </label>
+                        <input type="checkbox" name="adult" value="true">
+                    </div>
+                    <div class="border-solid border-2 p-2.5 w-[5em]">
+                        <input type="submit">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    <section class="grid xl:grid-cols-2 2xl:grid-cols-4 gap-8">
         <?php foreach ($films_ordered->results as $film){ ?>
-            <div class="flex flex-col bg-white shadow-lg border-current">
+            <div class="flex lg:flex-col bg-white shadow-lg border-current">
                 <?php $id_film=$film->id; ?>
                 <a href="SinglePage.php?film_id=<?php echo $id_film ?>">
                     <?php if($film->poster_path == Null){ ?>
@@ -160,9 +264,9 @@ if ($_POST) {
             </div>
         <?php } ?>
     </section>
-    <section>
+    <section class="hidden lg:block">
         <form method="POST">
-            <div class="bg-white shadow-lg border-2 h-[500px] w-[350px] p-6">
+            <div class="bg-white shadow-lg border-2 mr-6 h-[500px] w-[320px] lg:w-[350px] p-6">
                 <div class="grid grid-cols-2 gap-1">
                     <div>
                         <label for="28">Action</label>
