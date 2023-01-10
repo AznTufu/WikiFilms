@@ -18,7 +18,7 @@ session_start() ?>
         <a href="index.php" class="w-[50px] lg:w-[100px] ml-8 xl:ml-24 2xl:ml-34"><img src="img/logo.png" alt="logo"></a>
         <div>
             <a href="profil.php" class="text-lg lg:text-2xl font-semibold text-[#333] mr-6 lg:mr-10"><?php echo $_SESSION['name'] ?></a>
-            <a href="login.php"><i class="fa-solid fa-right-from-bracket sm:mr-6 lg:mr-8 xl:mr-10 text-xl"></i></a>
+            <a href="destroy.php"><i class="fa-solid fa-right-from-bracket sm:mr-6 lg:mr-8 xl:mr-10 text-xl"></i></a>
         </div>
     </div>
 </section>
